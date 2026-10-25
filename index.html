@@ -1,7 +1,362 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Albert Jan van Hoek</title>
+<meta name="description" content="Albert Jan van Hoek — infectious disease modeller, theorist of emergence and persistence, and music maker as Emergence.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EDF1F0;
+    --ink: #17282C;
+    --muted: #4E6266;
+    --line: #C9D3D2;
+    --signal: #C9412F;
+    --kept: #2E6B73;
+    --display: "Bricolage Grotesque", system-ui, sans-serif;
+    --text: "Newsreader", Georgia, serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #101B1E;
+      --ink: #DCE6E4;
+      --muted: #93A6A8;
+      --line: #2A3A3D;
+      --signal: #F0705C;
+      --kept: #6FB3BA;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--text);
+    font-size: 1.1875rem;
+    line-height: 1.6;
+  }
+  a { color: inherit; text-decoration-color: var(--signal); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  a:hover { color: var(--signal); }
+  :focus-visible { outline: 3px solid var(--signal); outline-offset: 3px; border-radius: 2px; }
+
+  .wrap { max-width: 68rem; margin: 0 auto; padding: 0 1.25rem; }
+
+  /* Hero */
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+    padding: 3.5rem 0 2.5rem;
+    align-items: center;
+  }
+  @media (min-width: 860px) {
+    .hero { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 3rem; padding: 6rem 0 4rem; }
+  }
+  h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(2.75rem, 7vw, 5.25rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin: 0 0 1.5rem;
+    font-variation-settings: "opsz" 96;
+  }
+  .lede {
+    font-size: clamp(1.3rem, 2.2vw, 1.55rem);
+    line-height: 1.4;
+    max-width: 30ch;
+    margin: 0 0 1.25rem;
+  }
+  .roles { color: var(--muted); margin: 0; max-width: 40ch; }
+
+  figure.net { margin: 0; }
+  .net canvas {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-height: 32rem;
+    cursor: crosshair;
+    border-radius: 6px;
+  }
+  .net figcaption { font-size: 0.95rem; color: var(--muted); margin-top: 0.5rem; }
+
+  /* Sections */
+  section { border-top: 1px solid var(--line); padding: 3rem 0; }
+  @media (min-width: 860px) {
+    section { display: grid; grid-template-columns: 14rem minmax(0, 42rem); gap: 3rem; padding: 4rem 0; }
+  }
+  h2 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 1.6rem;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    margin: 0 0 1rem;
+  }
+  h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin: 2rem 0 0.5rem;
+  }
+  .body > :first-child { margin-top: 0; }
+  p { margin: 0 0 1rem; }
+
+  blockquote {
+    margin: 1.75rem 0;
+    padding-left: 1.25rem;
+    border-left: 3px solid var(--signal);
+    font-style: italic;
+    font-size: 1.3rem;
+    line-height: 1.4;
+  }
+
+  ul.plain { list-style: none; padding: 0; margin: 0; }
+  ul.plain li { padding: 0.35rem 0; }
+  ul.tracks { padding-left: 1.1rem; margin: 0 0 1rem; }
+  ul.tracks li { margin: 0.2rem 0; }
+
+  .links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+
+  footer { border-top: 1px solid var(--line); padding: 2rem 0 3rem; color: var(--muted); font-size: 0.95rem; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { scroll-behavior: auto !important; }
+  }
+</style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+<main class="wrap">
+
+  <header class="hero">
+    <div>
+      <h1>Albert Jan van&nbsp;Hoek</h1>
+      <p class="lede">I study how things spread, persist and learn: in epidemics, in societies, and in minds.</p>
+      <p class="roles">Infectious disease modeller in the Netherlands. Working on a theory of emergence and persistence. Making music as Emergence.</p>
+    </div>
+    <figure class="net">
+      <canvas id="net" aria-label="Animation of an outbreak spreading through a contact network" role="img"></canvas>
+      <figcaption>An outbreak moving through a contact network. Click anywhere on it to start a new one.</figcaption>
+    </figure>
+  </header>
+
+  <section id="science">
+    <h2>Science</h2>
+    <div class="body">
+      <p>I am a senior infectious disease modeller and principal investigator at RIVM, the Dutch National Institute for Public Health and the Environment. I lead Infectieradar, the Dutch participatory surveillance cohort and part of the European Influenzanet network, in which people report their own symptoms every week.</p>
+      <p>My work has moved across epidemiology and health economics, the carriage dynamics of pneumococcus and meningococcus, natural language processing, simulation-based inference for epidemics in structured populations, and, more recently, agentic AI.</p>
+      <p>What connects it all is a question about populations: how individual contacts and choices add up to something none of the individuals planned.</p>
+    </div>
+  </section>
+
+  <section id="ideas">
+    <h2>Ideas</h2>
+    <div class="body">
+      <p><strong>Evolution by Emergence</strong> is a long-running project to describe persistence in a way that does not depend on the substrate. Cells, organisations, societies and artificial systems all face the same problem: to keep existing in a changing world, they have to keep learning, and they cannot do that alone. The working subtitle of the book is <em>How Networks Build, Retain and Transform Their Capacities</em>.</p>
+      <blockquote>Keep alive what keeps you alive, and improve it for the next generation.</blockquote>
+      <p>It starts from a thought experiment I call the Room. Four people from four traditions sit together, each equally certain, each holding a view the others cannot share. They cannot all be right. So inner conviction is not a reliable sign of truth, and correction by others is not optional: it is how any mind, human or artificial, stays connected to the world.</p>
+      <p>From there the work goes into world models and their integrity, distributed regulation instead of capture, and what we owe each other once we accept that we depend on one another. In short: <em>disco ergo sum</em>, I learn, therefore I am.</p>
+      <p class="links">
+        <a href="https://github.com/albertjanvanhoek/Evolution-by-Emergence">Evolution by Emergence on GitHub</a>
+      </p>
+    </div>
+  </section>
+
+  <section id="music">
+    <h2>Music</h2>
+    <div class="body">
+      <p>As <strong>Emergence</strong> I write and produce songs that carry the same ideas into a form people can hum. The range is wide: a Dutch jazz trilogy, an English hip-hop album about wealth inequality, frenchcore, and pop.</p>
+      <ul class="tracks">
+        <li>P(us), a hopeful answer to P(doom)</li>
+        <li>Kindness Is Not Magic</li>
+        <li>Make Me Correctable</li>
+        <li>Hold Open the Channel</li>
+        <li>Learn or Burn</li>
+      </ul>
+      <!-- Add links here once known, e.g.:
+      <p class="links">
+        <a href="SOUNDCLOUD_URL">SoundCloud</a>
+        <a href="YOUTUBE_URL">YouTube</a>
+      </p>
+      -->
+    </div>
+  </section>
+
+  <section id="elsewhere">
+    <h2>Elsewhere</h2>
+    <div class="body">
+      <ul class="plain links">
+        <li><a href="https://github.com/albertjanvanhoek">GitHub</a></li>
+        <!-- To add once URLs are known:
+        <li><a href="LINKEDIN_URL">LinkedIn</a></li>
+        <li><a href="ORCID_URL">ORCID</a></li>
+        <li><a href="SCHOLAR_URL">Google Scholar</a></li>
+        <li><a href="RESEARCHGATE_URL">ResearchGate</a></li>
+        -->
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <p>Based in Hilversum. This is a personal site; views here are my own and not those of my employer.</p>
+  </footer>
+</main>
+
+<script>
+(() => {
+  const canvas = document.getElementById("net");
+  const ctx = canvas.getContext("2d");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  let W = 0, H = 0, dpr = 1;
+  let nodes = [], edges = [], adj = [];
+  let tick = 0, idleSince = null, flashes = [];
+
+  const colors = () => {
+    const s = getComputedStyle(document.documentElement);
+    return {
+      ink: s.getPropertyValue("--ink").trim(),
+      line: s.getPropertyValue("--line").trim(),
+      signal: s.getPropertyValue("--signal").trim(),
+      kept: s.getPropertyValue("--kept").trim(),
+    };
+  };
+  let C = colors();
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { C = colors(); draw(); });
+
+  function build() {
+    const r = canvas.getBoundingClientRect();
+    dpr = window.devicePixelRatio || 1;
+    W = r.width; H = r.height;
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const n = Math.max(35, Math.min(90, Math.round((W * H) / 3200)));
+    const minD = Math.sqrt((W * H) / n) * 0.62;
+    const pad = 14;
+    nodes = [];
+    let guard = 0;
+    while (nodes.length < n && guard++ < 20000) {
+      const p = { x: pad + Math.random() * (W - 2 * pad), y: pad + Math.random() * (H - 2 * pad) };
+      if (nodes.every(q => (q.x - p.x) ** 2 + (q.y - p.y) ** 2 > minD * minD)) {
+        nodes.push({ ...p, state: 0, t: 0 }); // 0 susceptible, 1 infectious, 2 recovered
+      }
+    }
+    const k = 3, seen = new Set();
+    edges = []; adj = nodes.map(() => []);
+    nodes.forEach((a, i) => {
+      nodes.map((b, j) => [j, (a.x - b.x) ** 2 + (a.y - b.y) ** 2])
+        .filter(([j]) => j !== i)
+        .sort((u, v) => u[1] - v[1])
+        .slice(0, k)
+        .forEach(([j]) => {
+          const key = i < j ? i + "-" + j : j + "-" + i;
+          if (!seen.has(key)) { seen.add(key); edges.push([i, j]); adj[i].push(j); adj[j].push(i); }
+        });
+    });
+    seed();
+  }
+
+  function seed(x, y) {
+    nodes.forEach(n => { n.state = 0; n.t = 0; });
+    flashes = [];
+    let idx = Math.floor(Math.random() * nodes.length);
+    if (x !== undefined) {
+      let best = Infinity;
+      nodes.forEach((n, i) => { const d = (n.x - x) ** 2 + (n.y - y) ** 2; if (d < best) { best = d; idx = i; } });
+    }
+    nodes[idx].state = 1;
+    idleSince = null;
+  }
+
+  function step() {
+    const infectious = [];
+    nodes.forEach((n, i) => { if (n.state === 1) infectious.push(i); });
+    flashes = [];
+    infectious.forEach(i => {
+      adj[i].forEach(j => {
+        if (nodes[j].state === 0 && Math.random() < 0.32) {
+          nodes[j].nextState = 1;
+          flashes.push([i, j]);
+        }
+      });
+      nodes[i].t++;
+      if (nodes[i].t > 5) nodes[i].nextState = 2;
+    });
+    nodes.forEach(n => { if (n.nextState !== undefined) { n.state = n.nextState; n.t = 0; delete n.nextState; } });
+    return infectious.length > 0;
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = C.line;
+    ctx.beginPath();
+    edges.forEach(([i, j]) => { ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y); });
+    ctx.stroke();
+
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = C.signal;
+    ctx.beginPath();
+    flashes.forEach(([i, j]) => { ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y); });
+    ctx.stroke();
+
+    nodes.forEach(n => {
+      ctx.beginPath();
+      if (n.state === 1) {
+        ctx.fillStyle = C.signal;
+        ctx.arc(n.x, n.y, 5.5, 0, Math.PI * 2);
+        ctx.fill();
+      } else if (n.state === 2) {
+        ctx.fillStyle = C.kept;
+        ctx.arc(n.x, n.y, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        ctx.strokeStyle = C.ink;
+        ctx.lineWidth = 1.25;
+        ctx.arc(n.x, n.y, 3.5, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+    });
+  }
+
+  function loop(now) {
+    if (!loop.last || now - loop.last > 260) {
+      loop.last = now;
+      const active = step();
+      if (!active) {
+        if (idleSince === null) idleSince = now;
+        else if (now - idleSince > 2600) seed();
+      }
+      draw();
+    }
+    requestAnimationFrame(loop);
+  }
+
+  canvas.addEventListener("click", e => {
+    const r = canvas.getBoundingClientRect();
+    seed(e.clientX - r.left, e.clientY - r.top);
+    draw();
+    if (reduce) { for (let s = 0; s < 6; s++) step(); draw(); }
+  });
+
+  let resizeTimer;
+  window.addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { build(); draw(); }, 150); });
+
+  build();
+  if (reduce) {
+    for (let s = 0; s < 6; s++) step();
+    draw();
+  } else {
+    requestAnimationFrame(loop);
+  }
+})();
+</script>
 </body>
 </html>
