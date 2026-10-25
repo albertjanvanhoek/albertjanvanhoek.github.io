@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Albert Jan van Hoek</title>
-<meta name="description" content="Albert Jan van Hoek — infectious disease modeller, theorist of emergence and persistence, and music maker as Emergence.">
+<meta name="description" content="Albert Jan van Hoek: scientist at RIVM working on infectious disease epidemiology, and independent work on how we keep existing together.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
@@ -16,6 +16,8 @@
     --line: #C9D3D2;
     --signal: #C9412F;
     --kept: #2E6B73;
+    --tint: rgba(46, 107, 115, 0.09);
+    --tint-strong: rgba(46, 107, 115, 0.16);
     --display: "Bricolage Grotesque", system-ui, sans-serif;
     --text: "Newsreader", Georgia, serif;
   }
@@ -27,6 +29,8 @@
       --line: #2A3A3D;
       --signal: #F0705C;
       --kept: #6FB3BA;
+      --tint: rgba(111, 179, 186, 0.08);
+      --tint-strong: rgba(111, 179, 186, 0.16);
     }
   }
 
@@ -64,86 +68,125 @@
     line-height: 0.95;
     letter-spacing: -0.03em;
     margin: 0 0 1.5rem;
-    font-variation-settings: "opsz" 96;
   }
-  .lede {
-    font-size: clamp(1.3rem, 2.2vw, 1.55rem);
-    line-height: 1.4;
-    max-width: 30ch;
-    margin: 0 0 1.25rem;
-  }
+  .lede { font-size: clamp(1.3rem, 2.2vw, 1.55rem); line-height: 1.4; max-width: 32ch; margin: 0 0 1.25rem; }
   .roles { color: var(--muted); margin: 0; max-width: 40ch; }
 
   figure.net { margin: 0; }
-  .net canvas {
-    display: block;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    max-height: 32rem;
-    cursor: crosshair;
-    border-radius: 6px;
-  }
+  .net canvas { display: block; width: 100%; aspect-ratio: 1 / 1; max-height: 32rem; cursor: crosshair; border-radius: 6px; }
   .net figcaption { font-size: 1rem; line-height: 1.5; color: var(--muted); margin-top: 0.75rem; max-width: 38rem; }
   .net figcaption p { margin: 0 0 0.4rem; font-style: italic; }
   .net figcaption .hint { font-style: normal; font-size: 0.9rem; }
 
-  /* Sections */
-  section { border-top: 1px solid var(--line); padding: 3rem 0; }
+  /* Prose sections */
+  section.prose { border-top: 1px solid var(--line); padding: 3rem 0; }
   @media (min-width: 860px) {
-    section { display: grid; grid-template-columns: 14rem minmax(0, 42rem); gap: 3rem; padding: 4rem 0; }
+    section.prose { display: grid; grid-template-columns: 14rem minmax(0, 42rem); gap: 3rem; padding: 4rem 0; }
   }
-  h2 {
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 1.6rem;
-    letter-spacing: -0.01em;
-    line-height: 1.15;
-    margin: 0 0 1rem;
-  }
-  h3 {
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 1.15rem;
-    margin: 2rem 0 0.5rem;
-  }
+  h2 { font-family: var(--display); font-weight: 600; font-size: 1.6rem; letter-spacing: -0.01em; line-height: 1.15; margin: 0 0 1rem; }
+  h3 { font-family: var(--display); font-weight: 600; font-size: 1.15rem; margin: 2rem 0 0.5rem; }
   .body > :first-child { margin-top: 0; }
   p { margin: 0 0 1rem; }
+  blockquote { margin: 1.75rem 0; padding-left: 1.25rem; border-left: 3px solid var(--signal); font-style: italic; font-size: 1.3rem; line-height: 1.4; }
 
-  .dims { margin: 1.5rem 0 2rem; }
-  .dims > div { padding: 1.1rem 0; border-top: 1px solid var(--line); }
-  .dims > div:last-child { border-bottom: 1px solid var(--line); }
-  .dims dt {
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: var(--kept);
-    margin-bottom: 0.3rem;
-  }
-  .dims dd { margin: 0; }
-  .dims .q { font-size: 1.25rem; line-height: 1.4; margin-bottom: 0.35rem; }
-  .dims .w { color: var(--muted); font-size: 1rem; }
-
-  blockquote {
-    margin: 1.75rem 0;
-    padding-left: 1.25rem;
-    border-left: 3px solid var(--signal);
-    font-style: italic;
-    font-size: 1.3rem;
-    line-height: 1.4;
-  }
-
+  ul.aims { padding-left: 1.1rem; margin: 0 0 1.25rem; }
+  ul.aims li { margin: 0 0 0.6rem; }
   ul.plain { list-style: none; padding: 0; margin: 0; }
   ul.plain li { padding: 0.35rem 0; }
-  ul.tracks { padding-left: 1.1rem; margin: 0 0 1rem; }
-  ul.tracks li { margin: 0.2rem 0; }
-
   .links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
 
-  footer { border-top: 1px solid var(--line); padding: 2rem 0 3rem; color: var(--muted); font-size: 0.95rem; }
-
-  @media (prefers-reduced-motion: reduce) {
-    * { scroll-behavior: auto !important; }
+  /* The shift into the independent work */
+  section.indep { padding-top: 5rem; }
+  @media (min-width: 860px) { section.indep { padding-top: 7rem; } }
+  .question {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(2rem, 4.6vw, 3.4rem);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    margin: 0 0 1rem;
   }
+  .sub { color: var(--muted); font-size: 1.25rem; margin-bottom: 2.25rem; }
+  .core { font-size: 1.35rem; line-height: 1.4; font-style: italic; padding-left: 1.25rem; border-left: 3px solid var(--kept); }
+
+  /* The house */
+  .house { padding: 1rem 0 4rem; }
+  .plan {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-areas:
+      "eco  eco  econ econ legal legal"
+      "room room room room room  room"
+      "cult cult cult epi  epi   epi";
+    grid-template-rows: minmax(10.5rem, auto) minmax(8rem, auto) minmax(10.5rem, auto);
+  }
+  .room {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1.4rem 1.6rem 1.6rem 2.2rem;
+    text-decoration: none;
+    color: var(--ink);
+    transition: background-color 160ms ease;
+  }
+  .room:hover { background: var(--tint); color: var(--ink); }
+  .room[aria-current="true"] { background: var(--tint-strong); }
+  .room:focus-visible { outline-offset: -8px; }
+  .rname { font-family: var(--display); font-weight: 600; font-size: 0.95rem; color: var(--kept); }
+  .rq { font-size: 1.3rem; line-height: 1.3; max-width: 22ch; }
+  .foundation { justify-content: center; align-items: center; text-align: center; padding: 1.75rem 3rem; }
+  .foundation .rname { color: var(--signal); font-size: 1.05rem; }
+  .foundation .rq { max-width: 30ch; font-style: italic; }
+  .walls { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+  .plan-note { color: var(--muted); font-size: 1rem; margin: 1rem 0 0; max-width: 46rem; }
+
+  @media (max-width: 700px) {
+    .plan { grid-template-rows: minmax(4.75rem, auto) minmax(6.5rem, auto) minmax(4.75rem, auto); }
+    .room { padding: 0.75rem 0.5rem; justify-content: center; align-items: center; text-align: center; }
+    .room .rq { display: none; }
+    .rname { font-size: 0.82rem; }
+    .foundation { padding: 1rem 1.5rem; }
+    .foundation .rq { display: block; font-size: 1.05rem; }
+  }
+
+  /* Panels: what you find when you step into a room */
+  .panels { margin-top: 2.5rem; }
+  .panel { border-top: 1px solid var(--line); padding: 2.5rem 0 1rem; }
+  .panel[hidden] { display: none !important; }
+  .js .panel { border-top: 0; padding-top: 0.5rem; animation: enter 280ms ease-out; }
+  @keyframes enter { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .js .panel { animation: none; } .room { transition: none; } }
+  @media (min-width: 860px) {
+    .panel { display: grid; grid-template-columns: 14rem minmax(0, 42rem); column-gap: 3rem; }
+    .panel > * { grid-column: 2; }
+    .panel > header { grid-column: 1 / -1; display: grid; grid-template-columns: 14rem minmax(0, 42rem); column-gap: 3rem; margin-bottom: 1.25rem; }
+    .panel > header .pname { grid-column: 1; grid-row: 1 / span 2; padding-top: 0.6rem; }
+    .panel > header h3, .panel > header .fromto { grid-column: 2; }
+  }
+  .pname { font-family: var(--display); font-weight: 600; font-size: 1rem; color: var(--kept); margin: 0 0 0.25rem; }
+  #p-room .pname { color: var(--signal); }
+  .panel h3 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.6rem;
+  }
+  .fromto { color: var(--muted); font-style: italic; margin: 0; }
+  .panel h4 { font-family: var(--display); font-weight: 600; font-size: 1rem; margin: 2rem 0 0.5rem; }
+  ul.cq { list-style: none; padding: 0; margin: 0 0 1.75rem; }
+  ul.cq li { font-size: 1.25rem; line-height: 1.4; padding: 0.45rem 0 0.45rem 1.25rem; border-left: 1px solid var(--line); }
+  .status { font-size: 1rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 0.9rem; }
+  .status span { font-family: var(--display); font-weight: 600; color: var(--ink); margin-right: 0.5rem; }
+
+  /* Closing */
+  .closing { border-top: 1px solid var(--line); padding: 5rem 0 4.5rem; }
+  .closing .question { max-width: 22ch; margin-bottom: 1.5rem; }
+
+  footer { border-top: 1px solid var(--line); padding: 2rem 0 3rem; color: var(--muted); font-size: 0.95rem; }
 </style>
 </head>
 <body>
@@ -152,8 +195,8 @@
   <header class="hero">
     <div>
       <h1>Albert Jan van&nbsp;Hoek</h1>
-      <p class="lede">I study how things spread, persist and learn: in epidemics, in societies, and in minds.</p>
-      <p class="roles">Infectious disease modeller in the Netherlands. Working on a theory of emergence and persistence. Making music as Emergence.</p>
+      <p class="lede">Health, knowledge, trust, the living world: what keeps us alive is held in common, and lasts only as long as we keep tending it.</p>
+      <p class="roles">That work has a name, commoning. I do it as a scientist at RIVM, and in my independent work on how we keep existing together.</p>
     </div>
     <figure class="net">
       <canvas id="net" aria-label="Animation of a network whose connections fade unless messages keep travelling along them" role="img"></canvas>
@@ -164,77 +207,218 @@
     </figure>
   </header>
 
-  <section id="science">
-    <h2>Science</h2>
+  <section id="work" class="prose">
+    <h2>Work</h2>
     <div class="body">
-      <p>I am a senior infectious disease modeller and principal investigator at RIVM, the Dutch National Institute for Public Health and the Environment. I lead <a href="https://www.infectieradar.nl/">Infectieradar</a>, the Dutch participatory surveillance cohort and part of the European Influenzanet network, in which people report their own symptoms every week.</p>
-      <p>My work has moved across epidemiology and health economics, the carriage dynamics of pneumococcus and meningococcus, natural language processing, simulation-based inference for epidemics in structured populations, and, more recently, agentic AI.</p>
-      <p>What connects it all is a question about populations: how individual contacts and choices add up to something none of the individuals planned.</p>
-      <p class="links">
-        <a href="https://scholar.google.com/citations?user=4CtDs1sAAAAJ&amp;hl=en">Publications on Google Scholar</a>
-      </p>
-    </div>
-  </section>
-
-  <section id="ideas">
-    <h2>Ideas</h2>
-    <div class="body">
-      <p><strong>Evolution by Emergence</strong> is a long-running project to describe persistence in a way that does not depend on the substrate. Cells, organisations, societies and artificial systems all face the same problem: to keep existing in a changing world, they have to keep learning, and they cannot do that alone. The working subtitle of the book is <em>How Networks Build, Retain and Transform Their Capacities</em>.</p>
-      <blockquote>Keep alive what keeps you alive, and improve it for the next generation.</blockquote>
-      <p>It starts from a thought experiment I call the Room. Four people from four traditions sit together, each equally certain, each holding a view the others cannot share. They cannot all be right. So inner conviction is not a reliable sign of truth, and correction by others is not optional: it is how any mind, human or artificial, stays connected to the world.</p>
-      <p>From there, the question of how we keep existing together opens onto five dimensions.</p>
-      <dl class="dims">
-        <div>
-          <dt>Ecological</dt>
-          <dd class="q">How do the processes that make life possible arise, and how do they keep going?</dd>
-          <dd class="w">Metabolism, cycles and mutual dependence; Evolution by Emergence.</dd>
-        </div>
-        <div>
-          <dt>Economic</dt>
-          <dd class="q">How do we organise production, access and reward without creating needless scarcity?</dd>
-          <dd class="w">Transparent pricing: open cost prices, shared infrastructure, and separate rewards for solving problems.</dd>
-        </div>
-        <div>
-          <dt>Legal</dt>
-          <dd class="q">Which freedoms and limits protect people inside systems where everyone depends on everyone?</dd>
-          <dd class="w">Human rights, freedom, power and responsibility.</dd>
-        </div>
-        <div>
-          <dt>Cultural</dt>
-          <dd class="q">How do we give meaning to our existence as beings who learn?</dd>
-          <dd class="w">Music, stories, and the Discovarian idea: <em>disco ergo sum</em>, I learn, therefore I am.</dd>
-        </div>
-        <div>
-          <dt>Epistemic</dt>
-          <dd class="q">How can we discover what truly helps us endure, even when our convictions differ?</dd>
-          <dd class="w">World models, doubt, evidence, correction and collective learning.</dd>
-        </div>
-      </dl>
-      <p class="links">
-        <a href="https://github.com/albertjanvanhoek/Evolution-by-Emergence">Evolution by Emergence on GitHub</a>
-      </p>
-    </div>
-  </section>
-
-  <section id="music">
-    <h2>Music</h2>
-    <div class="body">
-      <p>As <strong>Emergence</strong> I write and produce songs that carry the same ideas into a form people can hum. The range is wide: a Dutch jazz trilogy, an English hip-hop album about wealth inequality, frenchcore, and pop.</p>
-      <ul class="tracks">
-        <li>P(us), a hopeful answer to P(doom)</li>
-        <li>Kindness Is Not Magic</li>
-        <li>Make Me Correctable</li>
-        <li>Hold Open the Channel</li>
-        <li>Learn or Burn</li>
+      <p>I am a senior scientist at RIVM, the Dutch National Institute for Public Health and the Environment, working on infectious disease epidemiology, modelling and health economics. I lead <a href="https://www.infectieradar.nl/">Infectieradar</a>, the Dutch participatory surveillance cohort and part of the European Influenzanet network, in which people report their own symptoms every week.</p>
+      <p>Along the way I have worked on the carriage dynamics of pneumococcus and meningococcus, on simulation-based inference for epidemics in structured populations, and on natural language processing.</p>
+      <p>Looking ahead, three things drive my work:</p>
+      <ul class="aims">
+        <li><strong>Open infrastructure for public health research.</strong> With my team I build CASE, an open-source project for survey-based research, with Case Survey and related versions built on it.</li>
+        <li><strong>AI in the daily workflow.</strong> Bringing natural language processing and AI into how surveillance and research are done.</li>
+        <li><strong>Evidence for decisions.</strong> Surveillance and cost-effectiveness analysis that gives decisions in public health a sound basis.</li>
       </ul>
       <p class="links">
-        <a href="https://soundcloud.com/emergence-223803727">Listen on SoundCloud</a>
-        <a href="https://www.youtube.com/@AutonomousInterdependence">Watch on YouTube</a>
+        <a href="https://scholar.google.com/citations?user=4CtDs1sAAAAJ&amp;hl=en">Publications on Google Scholar</a>
+        <a href="https://orcid.org/0000-0002-9244-0489">ORCID</a>
       </p>
     </div>
   </section>
 
-  <section id="elsewhere">
+  <section id="independent" class="prose indep">
+    <h2>Independent work</h2>
+    <div class="body">
+      <p class="question">We do not exist on our own. What follows from that?</p>
+      <p class="sub">Research into life, dependence, learning, and how we arrange our shared world.</p>
+      <p>Alongside my work at RIVM, I pursue an independent project on a question that has occupied me for most of my life:</p>
+      <p class="core">How can separate processes together form larger systems, on which their own survival then comes to depend?</p>
+      <p>Think of an ecosystem. In the nitrogen cycle, organisms with very different metabolisms each contribute to larger cycles. None of them needs to oversee the whole. Yet each depends on processes kept going by many others.</p>
+      <p>We see something similar in people. We exist thanks to biological processes, but also thanks to knowledge, care, technology, economic activity, institutions and cultural practices that no one produces alone.</p>
+      <p>These dependencies are not automatically harmonious. What is good for one part can harm another. What brings an advantage today can erode the conditions for survival tomorrow.</p>
+      <p>That raises new questions. How do such systems arise? When do they last? Why do they fall out of balance? And what changes when their parts can learn, think ahead, and consciously influence the whole?</p>
+      <p>I explore these questions from five perspectives, all resting on one foundation: the Room.</p>
+    </div>
+  </section>
+
+  <div class="house" id="house">
+    <nav class="plan" aria-label="Floor plan of the independent work">
+      <a class="room" href="#p-eco" data-room="eco" style="grid-area: eco"><span class="rname">Ecological</span><span class="rq">How do we keep existing?</span></a>
+      <a class="room" href="#p-econ" data-room="econ" style="grid-area: econ"><span class="rname">Economic</span><span class="rq">How do we share what we produce?</span></a>
+      <a class="room" href="#p-legal" data-room="legal" style="grid-area: legal"><span class="rname">Legal</span><span class="rq">What do we owe each other?</span></a>
+      <a class="room foundation" href="#p-room" data-room="room" style="grid-area: room"><span class="rname">The Room</span><span class="rq">Three people, three certainties. They cannot all be right.</span></a>
+      <a class="room" href="#p-cult" data-room="cult" style="grid-area: cult"><span class="rname">Cultural</span><span class="rq">How do we understand and live our existence?</span></a>
+      <a class="room" href="#p-epi" data-room="epi" style="grid-area: epi"><span class="rname">Epistemic</span><span class="rq">How do we know what is true?</span></a>
+      <svg class="walls" aria-hidden="true"></svg>
+    </nav>
+    <p class="plan-note">Every room opens onto the Room. A door between two rooms marks where one perspective directly depends on another. Choose a room to enter it.</p>
+
+    <div class="panels">
+
+      <article class="panel" id="p-room" data-room="room">
+        <header>
+          <p class="pname">The Room</p>
+          <h3>The foundation</h3>
+        </header>
+        <p>Three people sit in a room. One is certain of A, one of B, one of C, and the three cannot all be true together. You do not need to know who is right to know that at least two of them are wrong. And the ones who are wrong feel exactly as certain as the one who is right.</p>
+        <p>I first thought of this when I was about twenty, and it has stayed with me ever since. The logic is trivial; what follows from it is not. Certainty is a state of mind, not a guarantee of truth. I have held certainties myself that I later rejected with the same conviction.</p>
+        <p>As a mind you are a model of the world, not the world, so you can be wrong, even about your strongest belief. That fact makes everything else important. It means that you exist in relation: to the people, the evidence and the corrections that keep your model in touch with the world.</p>
+        <p class="status"><span>Status</span> The logical core is machine-checked in Lean. What it implies for people and institutions is argued, not proven.</p>
+        <p class="links"><a href="https://github.com/albertjanvanhoek/Evolution-by-Emergence/blob/main/papers/the-room-learning-constitution/README.md">Read The Room and the Learning Constitution</a></p>
+      </article>
+
+      <article class="panel" id="p-eco" data-room="eco">
+        <header>
+          <p class="pname">Ecological</p>
+          <h3>How do we keep existing?</h3>
+          <p class="fromto">From metabolism to ecosystems, intelligence and society.</p>
+        </header>
+        <p>A living organism does not exist independently of its surroundings. It needs energy, matter and continuous exchange to keep itself going.</p>
+        <p>But those surroundings are themselves the result of processes. Bacteria, fungi, plants and animals change the world in which other organisms live. Individual metabolisms become part of larger cycles.</p>
+        <p>So the whole is not a fixed backdrop against which life plays out. It is continually shaped by the very organisms that depend on it.</p>
+        <p>My research, <strong>Evolution by Emergence</strong>, explores whether such patterns can be described by a more general model. It asks how organisations of interdependent processes manage to last, how changes are retained, and how new possibilities arise.</p>
+        <p>Part of this is the idea of the <em>commons</em>: the shared resources, processes and conditions on which the functioning of each separate part depends.</p>
+        <p>An important question is whether we recognise similar mechanisms at different scales, from cells and organisms to intelligence and human organisations, and where that comparison breaks down.</p>
+        <h4>Central questions</h4>
+        <ul class="cq">
+          <li>What makes a system viable?</li>
+          <li>How do mutual dependencies arise?</li>
+          <li>When do processes strengthen each other, and when do they exhaust each other?</li>
+          <li>How does the survival of a part relate to the survival of the whole?</li>
+        </ul>
+        <p class="status"><span>Status</span> Formal results under stated premises, partly machine-checked in Lean. Whether real systems meet those premises, and where the comparison across scales fails, is open.</p>
+        <p class="links"><a href="https://github.com/albertjanvanhoek/Evolution-by-Emergence/blob/main/CORE.md">Read more about Evolution by Emergence</a></p>
+      </article>
+
+      <article class="panel" id="p-econ" data-room="econ">
+        <header>
+          <p class="pname">Economic</p>
+          <h3>How do we share what we produce?</h3>
+          <p class="fromto">From individual prices to the organisation of shared production.</p>
+        </header>
+        <p>Our economy is a vast network of interdependent activities. Almost nothing we use was produced entirely by one person or one organisation.</p>
+        <p>Yet companies usually make decisions about price and production from their own position. Sometimes it pays a supplier more to sell less at a higher price, even when many more people could be helped at a low extra cost.</p>
+        <p>That is why I am exploring an alternative pricing model. It separates the <strong>cost of making something available</strong> from the <strong>reward for solving the problem that made it available</strong>.</p>
+        <p>In this model, costs, margins, external effects and rewards are each made visible. A solution can be offered widely, while whoever developed it receives an explicit reward. The model is meant to work along whole production chains, without needing a central planner.</p>
+        <p>This is not a plea to ignore scarcity, risk, the cost of innovation, or property rights. It is an attempt to make the different economic functions of prices and profits more explicit, so that their consequences can be studied.</p>
+        <h4>Central questions</h4>
+        <ul class="cq">
+          <li>What does something really cost?</li>
+          <li>Who pays for the consequences that are not in the price?</li>
+          <li>How do we reward innovation without needlessly restricting access?</li>
+          <li>Which incentives support lasting availability and maintenance?</li>
+        </ul>
+        <p class="status"><span>Status</span> A worked-out research proposal with formal results under explicit assumptions, machine-checked in Lean. Whether such systems work better in practice has to be tested empirically.</p>
+        <p class="links"><a href="https://github.com/albertjanvanhoek/Evolution-by-Emergence/blob/main/research/transparent-pricing/README.md">Read more about transparent pricing</a></p>
+      </article>
+
+      <article class="panel" id="p-legal" data-room="legal">
+        <header>
+          <p class="pname">Legal</p>
+          <h3>What do we owe each other?</h3>
+          <p class="fromto">From individual rights to autonomy within interdependence.</p>
+        </header>
+        <p>Human rights protect, among other things, our freedom, dignity, privacy, and ability to make our own choices.</p>
+        <p>But what does autonomy mean when our thoughts, beliefs and decisions are continually shaped by information from others?</p>
+        <p>We experience reality through an internal world model. That model develops through experience, conversation, education, media and technology. This is how we learn, but it is also how we can be misled or manipulated.</p>
+        <p>In my legal and philosophical work I therefore explore the <strong>integrity of world models</strong>.</p>
+        <p>There are proposals for <em>neurorights</em>: rights meant to protect people against unwanted influence through neurotechnology. But a world model can also be influenced through language, deception, or by cutting off sources of information. That raises the question whether these different forms of influence can be understood from shared principles.</p>
+        <p>I also explore the responsibility people carry within relationships. Perhaps we cannot guarantee the quality of a relationship, but we can speak of efforts to communicate honestly, to leave room for correction, and to make repair possible.</p>
+        <p>Here hard tensions arise. A duty to maintain relationships must never be used to hold someone in a harmful one. And the wish to protect shared knowledge must not turn into enforced agreement.</p>
+        <h4>Central questions</h4>
+        <ul class="cq">
+          <li>Where is the line between influence and manipulation?</li>
+          <li>How do we protect freedom of thought?</li>
+          <li>Which responsibilities arise from dependence?</li>
+          <li>How do we protect dissenting perspectives, even when a majority sees things differently?</li>
+        </ul>
+        <p class="status"><span>Status</span> A normative and legal exploration, not a description of new rights that already exist.</p>
+        <p class="links">
+          <a href="https://github.com/albertjanvanhoek/Evolution-by-Emergence/blob/main/research/world-model-integrity/README.md">Read more about the integrity of world models</a>
+          <a href="https://github.com/albertjanvanhoek/Evolution-by-Emergence/blob/main/research/relational-duties/README.md">Read more about relational responsibilities</a>
+        </p>
+      </article>
+
+      <article class="panel" id="p-cult" data-room="cult">
+        <header>
+          <p class="pname">Cultural</p>
+          <h3>How do we understand and live our existence?</h3>
+          <p class="fromto">From scientific insight to identity, stories, music and ritual.</p>
+        </header>
+        <p>Science helps us understand how something works. But people do not live by explanations alone. We also live by stories, values, habits, emotions, music and shared meanings.</p>
+        <p>What happens to our self-image when we come to understand ourselves as learning processes?</p>
+        <p>From that question I am developing <strong>Disco ergo sum</strong>: <em>I learn, therefore I am.</em> From it grew <strong>Discovarianism</strong>, a playful and serious exploration of what it means to recognise yourself as a learning being.</p>
+        <p>If my picture of reality is fallible, doubt is not only a weakness. It can be an opening to new knowledge. And if I depend on other people, then honesty, listening, responsibility and the chance to repair mistakes are not just social conventions. They are essential parts of how I learn.</p>
+        <p>I do not explore these ideas only in philosophical texts. I also use music, stories, humour and symbolism. Music can do something a formal proof cannot: evoke an experience. A song can make you feel the tension between two people who live through the same thing but understand it differently. I write and produce songs as <strong>Emergence</strong>.</p>
+        <p>Discovarianism does not claim that a scientific theory automatically yields a complete morality or religion. It is a cultural experiment: what kind of attitude to life could grow from this self-understanding, and which values do we consciously choose along the way?</p>
+        <h4>Central questions</h4>
+        <ul class="cq">
+          <li>How does our behaviour change when our self-image changes?</li>
+          <li>Can curiosity and correctability become part of a culture?</li>
+          <li>What role do joy, beauty, wonder and ritual play in how people learn?</li>
+        </ul>
+        <p class="status"><span>Status</span> A cultural experiment. Some of its lines follow from being a learning process; others are values, chosen and named as such.</p>
+        <p class="links">
+          <a href="https://github.com/albertjanvanhoek/Evolution-by-Emergence/blob/main/research/discovarianism/README.md">Read more about Disco ergo sum and Discovarianism</a>
+          <a href="https://soundcloud.com/emergence-223803727">Listen to Emergence on SoundCloud</a>
+          <a href="https://www.youtube.com/@AutonomousInterdependence">Watch Autonomous Interdependence on YouTube</a>
+        </p>
+      </article>
+
+      <article class="panel" id="p-epi" data-room="epi">
+        <header>
+          <p class="pname">Epistemic</p>
+          <h3>How do we know what is true?</h3>
+          <p class="fromto">From individual beliefs to science, AI and shared world models.</p>
+        </header>
+        <p>We have no unlimited, direct access to reality. We try to understand it through observations, experiences and models.</p>
+        <p>Those models help us think ahead and act, but they can be incomplete or wrong. And two people with different experiences can come to hold different beliefs.</p>
+        <p>So I study not only what we know, but above all <strong>how we know, learn and correct</strong>.</p>
+        <p>An important distinction is between a world model and a <em>functional</em> world model. Someone can hold an entirely convincing story about reality that is nonetheless wrong. A functional world model must therefore be tested against information it does not itself determine, represent its uncertainty fairly, and keep correction possible.</p>
+        <p>That becomes harder once knowledge arises collectively. In science, in organisations and in AI systems, different contributions are combined. But how? What if one wrong contribution affects the whole? What if everyone relies on the same source? And what if dissenting perspectives disappear before their value becomes clear?</p>
+        <p>Differing views are not necessarily a problem to be solved as quickly as possible. They can help reveal hidden assumptions and errors. In my work I therefore explore how individual and collective world models develop, how correction can be preserved, and how human and artificial intelligence can examine each other's insights.</p>
+        <h4>Central questions</h4>
+        <ul class="cq">
+          <li>How do we recognise our own mistakes?</li>
+          <li>How do we preserve independent perspectives?</li>
+          <li>When is consensus helpful, and when is it dangerous?</li>
+          <li>How do we design systems that can revise their knowledge without making earlier mistakes invisible?</li>
+        </ul>
+        <p class="status"><span>Status</span> A definition note, reviewed three times. One narrow part of it is machine-checked in Lean; practices and a checklist are still to come.</p>
+        <p class="links"><a href="https://github.com/albertjanvanhoek/Evolution-by-Emergence/blob/main/research/world-model/WORLD_MODEL.md">Read more about world models</a></p>
+      </article>
+
+    </div>
+  </div>
+
+  <section id="inquiry" class="prose">
+    <h2>One open inquiry</h2>
+    <div class="body">
+      <p>These five perspectives are not separate islands.</p>
+      <p>Ecological systems provide the conditions for economic and social life. Economic structures help determine how those conditions are used and maintained. Law protects freedoms and limits power. Culture shapes what people find important. And our world models shape how we understand and change all of these systems.</p>
+      <p>At the same time, the perspectives can clash. What is economically efficient need not be ecologically sustainable. What sustains a collective need not be just to every individual. What seems self-evident within a culture need not be true.</p>
+      <p>So I do not try to fold every perspective into one answer decided in advance. I study their similarities, their differences, their dependencies and their limits.</p>
+      <h3>What is proven, and what remains open?</h3>
+      <p>Part of this work consists of mathematical models and formal proofs, some of them in Lean. Other parts are research proposals, conceptual explorations, hypotheses to be tested, or values chosen explicitly. I think that distinction matters.</p>
+      <blockquote>A proof inside a formal model does not prove that the world meets the model's assumptions.</blockquote>
+      <p>And a description of how systems last does not tell us which systems we ought to preserve. The work is therefore open to criticism, extension, testing and revision.</p>
+    </div>
+  </section>
+
+  <section id="together" class="prose">
+    <h2>Exploring together</h2>
+    <div class="body">
+      <p>I want this work to be accessible to people who come to similar questions from very different disciplines: biologists, economists, lawyers, philosophers, artists, designers, musicians, programmers, and anyone else who is curious.</p>
+      <p>Some will want to test the theory. Others will see applications, counterexamples, missing perspectives, or ways to make the ideas something you can experience. I am interested in all of these.</p>
+      <p>Not because we should all end up thinking the same, but because another perspective sometimes lets us discover what we could not see from our own.</p>
+    </div>
+  </section>
+
+  <section class="closing" aria-label="Closing question">
+    <p class="question">We do not exist on our own. What follows from that, and how can we find out?</p>
+    <p class="links"><a href="https://github.com/albertjanvanhoek/Evolution-by-Emergence">Explore the research archive on GitHub</a></p>
+  </section>
+
+  <section id="elsewhere" class="prose">
     <h2>Elsewhere</h2>
     <div class="body">
       <ul class="plain links">
@@ -253,7 +437,6 @@
     <p>Based in Hilversum. This is a personal site; views here are my own and not those of my employer.</p>
   </footer>
 </main>
-
 <script>
 (() => {
   // One rule: a line exists only as long as something travels along it.
@@ -430,6 +613,131 @@
     };
     requestAnimationFrame(loop);
   }
+})();
+</script>
+<script>
+(() => {
+  // The independent work as a floor plan. Walls are drawn around the rooms;
+  // a door only exists where the text says two perspectives directly depend on each other.
+  const plan = document.querySelector(".plan");
+  if (!plan) return;
+  document.documentElement.classList.add("js");
+
+  const svg = plan.querySelector(".walls");
+  const rooms = [...plan.querySelectorAll(".room")];
+  const panels = [...document.querySelectorAll(".panel")];
+  const byId = id => rooms.find(r => r.dataset.room === id);
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Doors: every room opens onto the Room; neighbours share a door where the text links them.
+  const DOORS = [
+    ["eco", "room", true], ["econ", "room", true], ["legal", "room", true],
+    ["room", "cult", true], ["room", "epi", true],
+    ["eco", "econ", false], ["econ", "legal", false], ["cult", "epi", false],
+  ];
+
+  const css = () => {
+    const s = getComputedStyle(document.documentElement);
+    const v = n => s.getPropertyValue(n).trim();
+    return { ink: v("--ink"), paper: v("--paper"), signal: v("--signal") };
+  };
+
+  const NS = "http://www.w3.org/2000/svg";
+  const el = (name, attrs) => {
+    const e = document.createElementNS(NS, name);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    svg.appendChild(e);
+    return e;
+  };
+
+  function draw() {
+    const C = css();
+    const box = plan.getBoundingClientRect();
+    const W = box.width, H = box.height;
+    svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+    svg.innerHTML = "";
+    const R = {};
+    rooms.forEach(r => {
+      const b = r.getBoundingClientRect();
+      R[r.dataset.room] = { x0: b.left - box.left, y0: b.top - box.top, x1: b.right - box.left, y1: b.bottom - box.top };
+    });
+
+    const small = W < 700;
+    const inner = small ? 1.25 : 1.5, outer = small ? 2.5 : 3.5;
+    const d = small ? 15 : 30;
+
+    // Inner walls: the outline of each room. Shared walls coincide.
+    Object.values(R).forEach(r => {
+      el("rect", { x: r.x0, y: r.y0, width: r.x1 - r.x0, height: r.y1 - r.y0, fill: "none", stroke: C.ink, "stroke-width": inner });
+    });
+    // Outer wall.
+    el("rect", { x: 0, y: 0, width: W, height: H, fill: "none", stroke: C.ink, "stroke-width": outer });
+
+    const door = (axis, at, c, colour, wallWidth) => {
+      // Erase the wall over the opening, then draw the leaf and its swing.
+      const h = d / 2;
+      if (axis === "v") {
+        el("line", { x1: at, y1: c - h, x2: at, y2: c + h, stroke: C.paper, "stroke-width": wallWidth + 1 });
+        el("line", { x1: at, y1: c - h, x2: at + d, y2: c - h, stroke: colour, "stroke-width": 1.5 });
+        el("path", { d: `M ${at + d} ${c - h} A ${d} ${d} 0 0 1 ${at} ${c + h}`, fill: "none", stroke: colour, "stroke-width": 1 });
+      } else {
+        el("line", { x1: c - h, y1: at, x2: c + h, y2: at, stroke: C.paper, "stroke-width": wallWidth + 1 });
+        el("line", { x1: c - h, y1: at, x2: c - h, y2: at + d, stroke: colour, "stroke-width": 1.5 });
+        el("path", { d: `M ${c - h} ${at + d} A ${d} ${d} 0 0 0 ${c + h} ${at}`, fill: "none", stroke: colour, "stroke-width": 1 });
+      }
+    };
+
+    DOORS.forEach(([a, b, foundation]) => {
+      const A = R[a], B = R[b];
+      const colour = foundation ? C.signal : C.ink;
+      if (Math.abs(A.x1 - B.x0) < 1.5) {
+        const lo = Math.max(A.y0, B.y0), hi = Math.min(A.y1, B.y1);
+        door("v", A.x1, lo + (hi - lo) * 0.72, colour, inner);
+      } else if (Math.abs(A.y1 - B.y0) < 1.5) {
+        const lo = Math.max(A.x0, B.x0), hi = Math.min(A.x1, B.x1);
+        door("h", A.y1, (lo + hi) / 2, colour, inner);
+      }
+    });
+
+    // The way in: the entrance is through the Room.
+    const F = R.room;
+    door("v", 0, (F.y0 + F.y1) / 2, C.ink, outer);
+  }
+
+  function open(id, scroll) {
+    rooms.forEach(r => r.setAttribute("aria-current", r.dataset.room === id ? "true" : "false"));
+    panels.forEach(p => { p.hidden = p.dataset.room !== id; });
+    const panel = panels.find(p => p.dataset.room === id);
+    if (scroll && panel) {
+      const top = panel.getBoundingClientRect().top;
+      if (top > window.innerHeight * 0.75) {
+        panel.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+      }
+    }
+  }
+
+  rooms.forEach(r => {
+    r.setAttribute("aria-controls", "p-" + r.dataset.room);
+    r.addEventListener("click", e => {
+      e.preventDefault();
+      open(r.dataset.room, true);
+      history.replaceState(null, "", "#p-" + r.dataset.room);
+    });
+  });
+
+  const fromHash = () => {
+    const id = (location.hash || "").replace("#p-", "");
+    return byId(id) ? id : "room";
+  };
+  open(fromHash(), false);
+
+  let t;
+  const redraw = () => { clearTimeout(t); t = setTimeout(draw, 60); };
+  window.addEventListener("resize", redraw);
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+  if ("ResizeObserver" in window) new ResizeObserver(redraw).observe(plan);
+  draw();
 })();
 </script>
 </body>
