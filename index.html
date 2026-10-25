@@ -140,8 +140,8 @@
       <p class="roles">Infectious disease modeller in the Netherlands. Working on a theory of emergence and persistence. Making music as Emergence.</p>
     </div>
     <figure class="net">
-      <canvas id="net" aria-label="Animation of an outbreak spreading through a contact network" role="img"></canvas>
-      <figcaption>An outbreak moving through a contact network. Click anywhere on it to start a new one.</figcaption>
+      <canvas id="net" aria-label="Animation of a network whose connections fade unless messages keep travelling along them" role="img"></canvas>
+      <figcaption>A relation lasts only as long as something keeps travelling between both ends: attention, honesty, correction. Click to add someone.</figcaption>
     </figure>
   </header>
 
@@ -210,141 +210,161 @@
 
 <script>
 (() => {
+  // One rule: a line exists only as long as something travels along it.
   const canvas = document.getElementById("net");
   const ctx = canvas.getContext("2d");
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  let W = 0, H = 0, dpr = 1;
-  let nodes = [], edges = [], adj = [];
-  let tick = 0, idleSince = null, flashes = [];
+  const DECAY = 0.09;        // strength lost per second without traffic
+  const BOOST = 0.42;        // strength gained per arriving pulse
+  const SEND_RATE = 0.55;    // pulses a node sends per second (its attention budget)
+  const REPLY = 0.55;        // chance a receiver answers back
+  const SPEED = 140;         // pulse speed in px per second
 
-  const colors = () => {
+  let W = 0, H = 0, R = 90;
+  let nodes = [], edges = new Map(), pulses = [];
+
+  const readColors = () => {
     const s = getComputedStyle(document.documentElement);
-    return {
-      ink: s.getPropertyValue("--ink").trim(),
-      line: s.getPropertyValue("--line").trim(),
-      signal: s.getPropertyValue("--signal").trim(),
-      kept: s.getPropertyValue("--kept").trim(),
-    };
+    const v = n => s.getPropertyValue(n).trim();
+    return { ink: v("--ink"), kept: v("--kept"), muted: v("--muted") };
   };
-  let C = colors();
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { C = colors(); draw(); });
+  let C = readColors();
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { C = readColors(); draw(); });
+
+  const key = (i, j) => (i < j ? i + "-" + j : j + "-" + i);
+  const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+  const neighbours = i => {
+    const out = [];
+    edges.forEach(e => { if (e.a === i) out.push(e.b); else if (e.b === i) out.push(e.a); });
+    return out;
+  };
+
+  function addNode(x, y) {
+    nodes.push({ x, y, vx: 0, vy: 0 });
+    return nodes.length - 1;
+  }
+
+  function link(i, j, s) {
+    const k = key(i, j);
+    if (!edges.has(k)) edges.set(k, { a: Math.min(i, j), b: Math.max(i, j), s });
+    return edges.get(k);
+  }
+
+  function send(from, to) {
+    const e = edges.get(key(from, to));
+    if (!e) return;
+    pulses.push({ e, from, to, t: 0, len: Math.max(20, dist(nodes[from], nodes[to])) });
+  }
+
+  function reachOut(i) {
+    const nb = new Set(neighbours(i));
+    let best = -1, bd = Infinity;
+    nodes.forEach((n, j) => {
+      if (j === i || nb.has(j)) return;
+      const d = dist(nodes[i], n);
+      if (d < R * 1.3 && d < bd) { bd = d; best = j; }
+    });
+    if (best >= 0) { link(i, best, 0.12); send(i, best); }
+  }
 
   function build() {
     const r = canvas.getBoundingClientRect();
-    dpr = window.devicePixelRatio || 1;
+    const dpr = window.devicePixelRatio || 1;
     W = r.width; H = r.height;
     canvas.width = Math.round(W * dpr);
     canvas.height = Math.round(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    const n = Math.max(35, Math.min(90, Math.round((W * H) / 3200)));
-    const minD = Math.sqrt((W * H) / n) * 0.62;
-    const pad = 14;
-    nodes = [];
+    const n = Math.max(30, Math.min(70, Math.round((W * H) / 4200)));
+    R = Math.sqrt((W * H) / n) * 1.25;
+    const minD = R * 0.5, pad = 16;
+    nodes = []; edges = new Map(); pulses = [];
     let guard = 0;
     while (nodes.length < n && guard++ < 20000) {
       const p = { x: pad + Math.random() * (W - 2 * pad), y: pad + Math.random() * (H - 2 * pad) };
-      if (nodes.every(q => (q.x - p.x) ** 2 + (q.y - p.y) ** 2 > minD * minD)) {
-        nodes.push({ ...p, state: 0, t: 0 }); // 0 susceptible, 1 infectious, 2 recovered
-      }
+      if (nodes.every(q => dist(p, q) > minD)) addNode(p.x, p.y);
     }
-    const k = 3, seen = new Set();
-    edges = []; adj = nodes.map(() => []);
     nodes.forEach((a, i) => {
-      nodes.map((b, j) => [j, (a.x - b.x) ** 2 + (a.y - b.y) ** 2])
-        .filter(([j]) => j !== i)
-        .sort((u, v) => u[1] - v[1])
-        .slice(0, k)
-        .forEach(([j]) => {
-          const key = i < j ? i + "-" + j : j + "-" + i;
-          if (!seen.has(key)) { seen.add(key); edges.push([i, j]); adj[i].push(j); adj[j].push(i); }
-        });
+      nodes.map((b, j) => [j, dist(a, b)]).filter(([j]) => j !== i)
+        .sort((u, v) => u[1] - v[1]).slice(0, 2)
+        .forEach(([j]) => link(i, j, 0.4 + Math.random() * 0.5));
     });
-    seed();
   }
 
-  function seed(x, y) {
-    nodes.forEach(n => { n.state = 0; n.t = 0; });
-    flashes = [];
-    let idx = Math.floor(Math.random() * nodes.length);
-    if (x !== undefined) {
-      let best = Infinity;
-      nodes.forEach((n, i) => { const d = (n.x - x) ** 2 + (n.y - y) ** 2; if (d < best) { best = d; idx = i; } });
-    }
-    nodes[idx].state = 1;
-    idleSince = null;
-  }
-
-  function step() {
-    const infectious = [];
-    nodes.forEach((n, i) => { if (n.state === 1) infectious.push(i); });
-    flashes = [];
-    infectious.forEach(i => {
-      adj[i].forEach(j => {
-        if (nodes[j].state === 0 && Math.random() < 0.32) {
-          nodes[j].nextState = 1;
-          flashes.push([i, j]);
-        }
+  function update(dt) {
+    // Gentle drift keeps the structure from ever standing still.
+    nodes.forEach((n, i) => {
+      n.vx += (Math.random() - 0.5) * 6 * dt;
+      n.vy += (Math.random() - 0.5) * 6 * dt;
+      nodes.forEach((m, j) => {
+        if (j === i) return;
+        const dx = n.x - m.x, dy = n.y - m.y, d2 = dx * dx + dy * dy, min = R * 0.45;
+        if (d2 < min * min && d2 > 0.01) { const f = (min * min - d2) / (min * min) * 20 * dt; const d = Math.sqrt(d2); n.vx += dx / d * f; n.vy += dy / d * f; }
       });
-      nodes[i].t++;
-      if (nodes[i].t > 5) nodes[i].nextState = 2;
+      n.vx *= 0.96; n.vy *= 0.96;
+      n.x += n.vx * dt * 10; n.y += n.vy * dt * 10;
+      const pad = 12;
+      if (n.x < pad) n.vx += 2 * dt; if (n.x > W - pad) n.vx -= 2 * dt;
+      if (n.y < pad) n.vy += 2 * dt; if (n.y > H - pad) n.vy -= 2 * dt;
+      n.x = Math.min(W - 4, Math.max(4, n.x)); n.y = Math.min(H - 4, Math.max(4, n.y));
     });
-    nodes.forEach(n => { if (n.nextState !== undefined) { n.state = n.nextState; n.t = 0; delete n.nextState; } });
-    return infectious.length > 0;
+
+    // Every relation fades on its own; stretched ones fade faster.
+    edges.forEach((e, k) => {
+      const stretch = Math.max(1, dist(nodes[e.a], nodes[e.b]) / R);
+      e.s -= DECAY * stretch * stretch * dt;
+      if (e.s <= 0) edges.delete(k);
+    });
+
+    // Pulses travel; arrival refreshes the line, and often gets an answer.
+    pulses = pulses.filter(p => {
+      if (!edges.has(key(p.from, p.to))) return false;
+      p.t += (SPEED * dt) / p.len;
+      if (p.t < 1) return true;
+      p.e.s = Math.min(1, p.e.s + BOOST);
+      if (Math.random() < REPLY) send(p.to, p.from);
+      return false;
+    });
+
+    // Each node has a limited amount of attention to spread over its relations.
+    nodes.forEach((n, i) => {
+      if (Math.random() < SEND_RATE * dt) {
+        const nb = neighbours(i);
+        if (nb.length < 2 || Math.random() < 0.08) reachOut(i);
+        else send(i, nb[Math.floor(Math.random() * nb.length)]);
+      }
+    });
   }
 
   function draw() {
     ctx.clearRect(0, 0, W, H);
-    ctx.lineWidth = 1;
-    ctx.strokeStyle = C.line;
-    ctx.beginPath();
-    edges.forEach(([i, j]) => { ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y); });
-    ctx.stroke();
-
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = C.signal;
-    ctx.beginPath();
-    flashes.forEach(([i, j]) => { ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y); });
-    ctx.stroke();
-
-    nodes.forEach(n => {
-      ctx.beginPath();
-      if (n.state === 1) {
-        ctx.fillStyle = C.signal;
-        ctx.arc(n.x, n.y, 5.5, 0, Math.PI * 2);
-        ctx.fill();
-      } else if (n.state === 2) {
-        ctx.fillStyle = C.kept;
-        ctx.arc(n.x, n.y, 3.5, 0, Math.PI * 2);
-        ctx.fill();
-      } else {
-        ctx.strokeStyle = C.ink;
-        ctx.lineWidth = 1.25;
-        ctx.arc(n.x, n.y, 3.5, 0, Math.PI * 2);
-        ctx.stroke();
-      }
+    ctx.strokeStyle = C.ink;
+    edges.forEach(e => {
+      const a = nodes[e.a], b = nodes[e.b];
+      ctx.globalAlpha = Math.min(1, e.s) * 0.75;
+      ctx.lineWidth = 0.6 + e.s * 1.2;
+      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
     });
-  }
+    ctx.globalAlpha = 1;
 
-  function loop(now) {
-    if (!loop.last || now - loop.last > 260) {
-      loop.last = now;
-      const active = step();
-      if (!active) {
-        if (idleSince === null) idleSince = now;
-        else if (now - idleSince > 2600) seed();
-      }
-      draw();
-    }
-    requestAnimationFrame(loop);
+    ctx.fillStyle = C.kept;
+    pulses.forEach(p => {
+      const a = nodes[p.from], b = nodes[p.to];
+      ctx.beginPath();
+      ctx.arc(a.x + (b.x - a.x) * p.t, a.y + (b.y - a.y) * p.t, 2.4, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    ctx.fillStyle = C.ink;
+    nodes.forEach(n => { ctx.beginPath(); ctx.arc(n.x, n.y, 3.2, 0, Math.PI * 2); ctx.fill(); });
   }
 
   canvas.addEventListener("click", e => {
     const r = canvas.getBoundingClientRect();
-    seed(e.clientX - r.left, e.clientY - r.top);
+    const i = addNode(e.clientX - r.left, e.clientY - r.top);
+    reachOut(i); reachOut(i);
     draw();
-    if (reduce) { for (let s = 0; s < 6; s++) step(); draw(); }
   });
 
   let resizeTimer;
@@ -352,9 +372,16 @@
 
   build();
   if (reduce) {
-    for (let s = 0; s < 6; s++) step();
+    for (let s = 0; s < 600; s++) update(1 / 30);
     draw();
   } else {
+    let last = performance.now();
+    const loop = now => {
+      const dt = Math.min(0.05, (now - last) / 1000);
+      last = now;
+      update(dt); draw();
+      requestAnimationFrame(loop);
+    };
     requestAnimationFrame(loop);
   }
 })();
