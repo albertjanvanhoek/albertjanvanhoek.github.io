@@ -83,7 +83,9 @@
     cursor: crosshair;
     border-radius: 6px;
   }
-  .net figcaption { font-size: 0.95rem; color: var(--muted); margin-top: 0.5rem; }
+  .net figcaption { font-size: 1rem; line-height: 1.5; color: var(--muted); margin-top: 0.75rem; max-width: 38rem; }
+  .net figcaption p { margin: 0 0 0.4rem; font-style: italic; }
+  .net figcaption .hint { font-style: normal; font-size: 0.9rem; }
 
   /* Sections */
   section { border-top: 1px solid var(--line); padding: 3rem 0; }
@@ -141,7 +143,10 @@
     </div>
     <figure class="net">
       <canvas id="net" aria-label="Animation of a network whose connections fade unless messages keep travelling along them" role="img"></canvas>
-      <figcaption>A relation lasts only as long as something keeps travelling between both ends: attention, honesty, correction. Click to add someone.</figcaption>
+      <figcaption>
+        <p>A disease can only go where we have gone to each other. The lines fray with death, parting and distance, and are spun again by birth, love and kinship. Epidemiology reads what they leave behind: a quiet record of affection, of contact, of how much we need one another.</p>
+        <p class="hint">Click to add someone.</p>
+      </figcaption>
     </figure>
   </header>
 
