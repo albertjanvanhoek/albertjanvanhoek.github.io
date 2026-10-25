@@ -109,6 +109,20 @@
   .body > :first-child { margin-top: 0; }
   p { margin: 0 0 1rem; }
 
+  .dims { margin: 1.5rem 0 2rem; }
+  .dims > div { padding: 1.1rem 0; border-top: 1px solid var(--line); }
+  .dims > div:last-child { border-bottom: 1px solid var(--line); }
+  .dims dt {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--kept);
+    margin-bottom: 0.3rem;
+  }
+  .dims dd { margin: 0; }
+  .dims .q { font-size: 1.25rem; line-height: 1.4; margin-bottom: 0.35rem; }
+  .dims .w { color: var(--muted); font-size: 1rem; }
+
   blockquote {
     margin: 1.75rem 0;
     padding-left: 1.25rem;
@@ -168,7 +182,34 @@
       <p><strong>Evolution by Emergence</strong> is a long-running project to describe persistence in a way that does not depend on the substrate. Cells, organisations, societies and artificial systems all face the same problem: to keep existing in a changing world, they have to keep learning, and they cannot do that alone. The working subtitle of the book is <em>How Networks Build, Retain and Transform Their Capacities</em>.</p>
       <blockquote>Keep alive what keeps you alive, and improve it for the next generation.</blockquote>
       <p>It starts from a thought experiment I call the Room. Four people from four traditions sit together, each equally certain, each holding a view the others cannot share. They cannot all be right. So inner conviction is not a reliable sign of truth, and correction by others is not optional: it is how any mind, human or artificial, stays connected to the world.</p>
-      <p>From there the work goes into world models and their integrity, distributed regulation instead of capture, and what we owe each other once we accept that we depend on one another. In short: <em>disco ergo sum</em>, I learn, therefore I am.</p>
+      <p>From there, the question of how we keep existing together opens onto five dimensions.</p>
+      <dl class="dims">
+        <div>
+          <dt>Ecological</dt>
+          <dd class="q">How do the processes that make life possible arise, and how do they keep going?</dd>
+          <dd class="w">Metabolism, cycles and mutual dependence; Evolution by Emergence.</dd>
+        </div>
+        <div>
+          <dt>Economic</dt>
+          <dd class="q">How do we organise production, access and reward without creating needless scarcity?</dd>
+          <dd class="w">Transparent pricing: open cost prices, shared infrastructure, and separate rewards for solving problems.</dd>
+        </div>
+        <div>
+          <dt>Legal</dt>
+          <dd class="q">Which freedoms and limits protect people inside systems where everyone depends on everyone?</dd>
+          <dd class="w">Human rights, freedom, power and responsibility.</dd>
+        </div>
+        <div>
+          <dt>Cultural</dt>
+          <dd class="q">How do we give meaning to our existence as beings who learn?</dd>
+          <dd class="w">Music, stories, and the Discovarian idea: <em>disco ergo sum</em>, I learn, therefore I am.</dd>
+        </div>
+        <div>
+          <dt>Epistemic</dt>
+          <dd class="q">How can we discover what truly helps us endure, even when our convictions differ?</dd>
+          <dd class="w">World models, doubt, evidence, correction and collective learning.</dd>
+        </div>
+      </dl>
       <p class="links">
         <a href="https://github.com/albertjanvanhoek/Evolution-by-Emergence">Evolution by Emergence on GitHub</a>
       </p>
