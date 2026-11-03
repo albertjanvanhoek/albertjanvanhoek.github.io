@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ouder blijven, ook als het schuurt</title>
+<meta name="description" content="Basiskennis voor gescheiden ouders met een ex met wie het (bijna) altijd moeizaam gaat: je bent een lerend model, je leren hangt af van je gedrag, en uit gedrag kan een betere relatie groeien. Met gedragsregels, grenzen en wat kinderen nodig hebben.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EDF1F0;
+    --ink: #17282C;
+    --muted: #4E6266;
+    --line: #C9D3D2;
+    --signal: #C9412F;
+    --kept: #2E6B73;
+    --tint: rgba(46, 107, 115, 0.09);
+    --tint-strong: rgba(46, 107, 115, 0.16);
+    --warn: rgba(201, 65, 47, 0.08);
+    --on-kept: #F3F7F6;
+    --display: "Bricolage Grotesque", system-ui, sans-serif;
+    --text: "Newsreader", Georgia, serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #101B1E;
+      --ink: #DCE6E4;
+      --muted: #93A6A8;
+      --line: #2A3A3D;
+      --signal: #F0705C;
+      --kept: #6FB3BA;
+      --tint: rgba(111, 179, 186, 0.08);
+      --tint-strong: rgba(111, 179, 186, 0.16);
+      --warn: rgba(240, 112, 92, 0.10);
+      --on-kept: #0E1A1C;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--text);
+    font-size: 1.1875rem;
+    line-height: 1.6;
+  }
+  a { color: inherit; text-decoration-color: var(--signal); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  a:hover { color: var(--signal); }
+  :focus-visible { outline: 3px solid var(--signal); outline-offset: 3px; border-radius: 2px; }
+
+  .wrap { max-width: 68rem; margin: 0 auto; padding: 0 1.25rem; }
+
+  .home { display: inline-block; margin-top: 1.5rem; font-family: var(--display); font-weight: 600; font-size: 0.95rem; color: var(--muted); text-decoration: none; }
+  .home:hover { color: var(--signal); }
+
+  /* Kop */
+  .hero { padding: 3rem 0 2.5rem; max-width: 46rem; }
+  @media (min-width: 860px) { .hero { padding: 5rem 0 3.5rem; } }
+  h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(2.6rem, 6.5vw, 4.75rem);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    margin: 0 0 1.5rem;
+  }
+  .lede { font-size: clamp(1.3rem, 2.2vw, 1.55rem); line-height: 1.4; margin: 0 0 1.25rem; }
+  .note { color: var(--muted); margin: 0 0 1rem; }
+
+  /* De lijn */
+  ol.chain { list-style: none; margin: 1.75rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 0.4rem; align-items: center; }
+  ol.chain li { font-family: var(--display); font-weight: 600; font-size: 0.95rem; line-height: 1.2; padding: 0.5rem 0.8rem; border-radius: 999px; background: var(--tint-strong); color: var(--ink); }
+  ol.chain li:last-child { background: var(--kept); color: var(--on-kept); }
+  ol.chain li + li { margin-left: 1.5rem; position: relative; }
+  ol.chain li + li::before { content: "→"; position: absolute; left: -1.25rem; top: 50%; transform: translateY(-50%); color: var(--signal); font-weight: 800; }
+
+  /* Inhoudsopgave */
+  nav.toc { border-top: 1px solid var(--line); padding: 1.5rem 0 2rem; }
+  nav.toc ol { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.35rem 2rem; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); }
+  nav.toc a { font-family: var(--display); font-weight: 600; font-size: 1rem; text-decoration: none; color: var(--kept); }
+  nav.toc a:hover { color: var(--signal); }
+  nav.toc .n { color: var(--muted); font-weight: 400; margin-right: 0.4rem; }
+
+  /* Secties */
+  section.prose { border-top: 1px solid var(--line); padding: 3rem 0; }
+  @media (min-width: 860px) {
+    section.prose { display: grid; grid-template-columns: 14rem minmax(0, 42rem); gap: 3rem; padding: 4rem 0; }
+    section.prose > h2 { position: sticky; top: 1.5rem; align-self: start; }
+  }
+  h2 { color: var(--kept); font-family: var(--display); font-weight: 600; font-size: 1.6rem; letter-spacing: -0.01em; line-height: 1.15; margin: 0 0 1rem; }
+  h2 .n { display: block; font-size: 0.95rem; color: var(--muted); font-weight: 400; margin-bottom: 0.3rem; }
+  h3 { font-family: var(--display); font-weight: 600; font-size: 1.2rem; line-height: 1.25; margin: 2.25rem 0 0.6rem; }
+  .body > :first-child { margin-top: 0; }
+  p { margin: 0 0 1rem; }
+  .intro { font-size: 1.3rem; line-height: 1.45; font-style: italic; padding-left: 1.25rem; border-left: 3px solid var(--kept); margin-bottom: 1.75rem; }
+  .key { font-size: 1.3rem; line-height: 1.4; font-family: var(--display); font-weight: 600; color: var(--kept); margin: 1.5rem 0; }
+
+  ul.rules { list-style: none; padding: 0; margin: 0 0 1.5rem; }
+  ul.rules li { padding: 0.2rem 0 0.9rem 1.25rem; border-left: 2px solid var(--line); margin-bottom: 0.5rem; }
+  ul.rules li strong { font-family: var(--display); font-weight: 600; display: block; font-size: 1.05rem; margin-bottom: 0.2rem; }
+  ul.rules .why { display: block; font-size: 0.95rem; color: var(--muted); font-style: italic; margin-top: 0.35rem; }
+
+  ul.plain { padding-left: 1.1rem; margin: 0 0 1.25rem; }
+  ul.plain li { margin: 0 0 0.5rem; }
+  ul.plain li::marker { color: var(--kept); }
+
+  /* Open/dicht-tabel */
+  table.oc { width: 100%; border-collapse: collapse; margin: 1.25rem 0 1.75rem; font-size: 1.02rem; line-height: 1.4; }
+  table.oc th { font-family: var(--display); font-weight: 600; font-size: 0.95rem; text-align: left; padding: 0.5rem 0.75rem; }
+  table.oc th:first-child { color: var(--kept); border-bottom: 3px solid var(--kept); }
+  table.oc th:last-child { color: var(--signal); border-bottom: 3px solid var(--signal); }
+  table.oc td { padding: 0.55rem 0.75rem; border-bottom: 1px solid var(--line); vertical-align: top; width: 50%; }
+  table.oc td:first-child { background: var(--tint); }
+
+  /* Diagram */
+  figure.loop { margin: 1.5rem 0 2rem; }
+  figure.loop svg { display: block; width: 100%; height: auto; max-width: 36rem; }
+  figure.loop figcaption { font-size: 1rem; color: var(--muted); font-style: italic; margin-top: 0.6rem; max-width: 36rem; }
+  .lp-node { fill: var(--tint-strong); stroke: var(--kept); stroke-width: 2; }
+  .lp-kids { fill: var(--warn); stroke: var(--signal); stroke-width: 2; }
+  .lp-arrow { stroke: var(--ink); stroke-width: 2.5; fill: none; }
+  .lp-dash { stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 5 5; fill: none; }
+  .lp-head { fill: var(--ink); }
+  .lp-t { fill: var(--ink); font-family: var(--display); font-weight: 600; font-size: 17px; }
+  .lp-s { fill: var(--muted); font-family: var(--text); font-size: 14px; font-style: italic; }
+  .lp-l { fill: var(--ink); font-family: var(--display); font-size: 14px; }
+  .lp-big.lp-t { font-size: 19px; }
+  .lp-big.lp-s, .lp-big.lp-l { font-size: 16px; }
+  figure.loop svg.lp-tall { display: none; max-width: 22rem; }
+  @media (max-width: 560px) {
+    figure.loop svg.lp-wide { display: none; }
+    figure.loop svg.lp-tall { display: block; }
+  }
+
+  /* Voorbeeldberichten */
+  .msgs { margin: 0.75rem 0 1.25rem; display: grid; gap: 0.6rem; }
+  .msg { margin: 0; font-size: 1.05rem; line-height: 1.5; padding: 0.8rem 1rem; border-radius: 6px; max-width: 34rem; }
+  .msg .who { display: block; font-family: var(--display); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; color: var(--muted); }
+  .msg.in { background: var(--warn); }
+  .msg.out { background: var(--tint-strong); justify-self: end; }
+
+  /* Kaders */
+  .box { padding: 1.1rem 1.25rem; margin: 1.75rem 0; border-left: 3px solid var(--kept); background: var(--tint); }
+  .box.safe { border-left-color: var(--signal); background: var(--warn); }
+  .box h3 { margin-top: 0; }
+  .box p:last-child { margin-bottom: 0; }
+
+  /* Samenvatting */
+  .closing { background: var(--kept); color: var(--on-kept); box-shadow: 0 0 0 100vmax var(--kept); clip-path: inset(0 -100vmax); padding: 4.5rem 0 4rem; }
+  @media (min-width: 860px) { .closing { display: grid; grid-template-columns: 14rem minmax(0, 42rem); gap: 3rem; } }
+  .closing h2, .closing h2 .n { color: var(--on-kept); }
+  .closing h3 { font-size: 1rem; margin: 0 0 0.5rem; opacity: 0.85; }
+  .closing ol { margin: 0 0 1.75rem; padding-left: 1.6rem; }
+  .closing li { font-size: 1.2rem; line-height: 1.4; margin-bottom: 0.55rem; padding-left: 0.3rem; }
+  .closing li::marker { font-family: var(--display); font-weight: 600; }
+  .closing .last { font-family: var(--display); font-weight: 800; font-size: clamp(1.7rem, 3.6vw, 2.5rem); line-height: 1.05; letter-spacing: -0.02em; margin: 0.5rem 0 0; }
+  .closing + section.prose { border-top: 0; }
+
+  footer { border-top: 1px solid var(--line); padding: 2rem 0 3rem; color: var(--muted); font-size: 0.95rem; }
+  footer p { max-width: 46rem; }
+  .version { font-family: var(--display); font-size: 0.92rem; line-height: 1.4; color: var(--muted); background: var(--tint); border-left: 3px solid var(--kept); padding: 0.65rem 0.9rem; margin: 1.25rem 0 0; }
+  .version a { color: var(--kept); }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <p class="version">Dit is versie 0.1 van deze pagina, de eerste versie. Er is een nieuwere versie: <a href="/samen-ouder/">versie 0.2</a>.</p>
+
+  <a class="home" href="/">← AJ van Hoek</a>
+
+  <header class="hero">
+    <h1>Ouder blijven, ook als het schuurt</h1>
+    <p class="lede">Basiskennis voor ouders die na een scheiding moeten samenwerken met een ex met wie het (bijna) altijd moeizaam gaat, en met de nieuwe partners die erbij komen.</p>
+    <p class="note">Dit is geen handleiding om je ex te veranderen. Dat kan niemand. Het is basiskennis die één lijn volgt. Je bent een lerend model van de werkelijkheid, autonoom en toch wederzijds afhankelijk, en in een scheiding wordt dat scherper zichtbaar dan ooit: de kinderen zijn de brug die blijft. Of dat model goed leert, hangt af van wat je doet. Wat je doet, is waaruit de ander leert. En zo kan uit gedrag, langzaam, een betere relatie groeien. Wie die lijn begrijpt, hoeft minder op wilskracht te leunen. En dat is nodig, want dit gaat over jaren: overdrachten, verjaardagen, schoolgesprekken, nieuwe partners, puberteit.</p>
+    <ol class="chain" aria-label="De lijn van deze tekst">
+      <li>Je bent een model</li>
+      <li>Autonoom, en toch wederzijds afhankelijk</li>
+      <li>Een model moet leren</li>
+      <li>Leren hangt af van gedrag</li>
+      <li>Gedrag is wat de ander leert</li>
+      <li>Daaruit groeit de relatie</li>
+    </ol>
+  </header>
+
+  <nav class="toc" aria-label="Inhoud">
+    <ol>
+      <li><a href="#model"><span class="n">1</span>Het fundament: een model, autonoom en verbonden</a></li>
+      <li><a href="#leren"><span class="n">2</span>Een model dat leert</a></li>
+      <li><a href="#gedrag"><span class="n">3</span>Leren hangt af van gedrag</a></li>
+      <li><a href="#relatie"><span class="n">4</span>Van gedrag naar een betere relatie</a></li>
+      <li><a href="#evenwicht"><span class="n">5</span>Evenwicht tussen twee volwassenen</a></li>
+      <li><a href="#omgaan"><span class="n">6</span>Wat je doet: jezelf en je ex</a></li>
+      <li><a href="#grenzen"><span class="n">7</span>Grenzen stellen</a></li>
+      <li><a href="#kinderen"><span class="n">8</span>Wat je kinderen nodig hebben</a></li>
+      <li><a href="#vergeven"><span class="n">9</span>Vergeef jezelf, en wees trots</a></li>
+      <li><a href="#werk"><span class="n">10</span>Het blijft werk</a></li>
+      <li><a href="#kort"><span class="n">11</span>In het kort</a></li>
+    </ol>
+  </nav>
+
+  <!-- 1 -->
+  <section id="model" class="prose">
+    <h2><span class="n">1</span>Het fundament</h2>
+    <div class="body">
+      <h3>Drie mensen, drie zekerheden</h3>
+      <p>Stel je drie mensen voor die over hetzelfde huwelijk praten: jij, je ex, en de nieuwe partner van je ex. Ieder is zeker van een eigen versie, en die versies kunnen niet allemaal tegelijk waar zijn. Je hoeft niet te weten wie gelijk heeft om te weten dat minstens twee van de drie het (op zijn minst deels) mis hebben. En wie het mis heeft, voelt zich precies even zeker als wie het goed heeft.</p>
+      <p>Dat is geen beschuldiging, het is logica. Je kunt het bij jezelf nagaan. Denk aan iets waarvan je ooit volledig zeker was, en wat je later met dezelfde zekerheid verwierp. Beide keren voelde het als de waarheid. Zekerheid zegt dus iets over jou, niet over de wereld.</p>
+
+      <h3>Je leeft in je eigen model van de werkelijkheid</h3>
+      <p>Wat volgt daaruit? Dat je hoofd de werkelijkheid niet kopieert, maar er een model van maakt: een verhaal over wat er gebeurt, waarom, en wat er gaat gebeuren. Dat model is opgebouwd uit alles wat je hebt meegemaakt. Je kunt niet zonder, want zonder model kun je niet handelen. Maar het is niet de wereld zelf, en het kan ernaast zitten, ook in wat je het zekerst weet.</p>
+      <p>Hetzelfde geldt voor je ex en voor iedereen om jullie heen. Ieder leeft in een eigen model, en de modellen botsen. Vaak liegt er dan niemand: de modellen hebben verschillende dingen opgeslagen en verschillende dingen gemist. De vraag <em>wie heeft gelijk over het verleden?</em> is daarom zelden op te lossen. De vraag <em>wat werkt nu, voor de kinderen?</em> wel.</p>
+
+      <h3>Autonoom, en toch wederzijds afhankelijk</h3>
+      <p>Je bent een eigen persoon. Je maakt je eigen keuzes, leeft in je eigen model en bent verantwoordelijk voor je eigen gedrag. Tegelijk houdt niemand zichzelf alleen overeind. Je leeft van slaap, eten, werk, vrienden, familie en school, en wat jij doet, raakt anderen weer. Beide zijn tegelijk waar: je bent <em>autonoom</em>, en je bent <em>wederzijds afhankelijk</em>.</p>
+      <p>Dat is geen tegenstelling. Zo zit alles in elkaar wat leeft: een eigen geheel dat alleen bestaat via wat het met anderen uitwisselt. Autonomie betekent niet dat je niemand nodig hebt. Het betekent dat je zelf kiest hoe je je verhoudt tot wie je nodig hebt.</p>
+
+      <h3>Een scheiding verandert de vorm van de verbinding, niet het bestaan ervan</h3>
+      <p>Voor veel mensen was de scheiding juist bedoeld om niet meer met elkaar te hoeven omgaan. Een eigen huis, eigen regels, een eigen leven: meer autonomie. Dat is terecht, en voor een groot deel lukt dat ook. Maar met gedeelde kinderen blijft er een brug. Wat je ex doet, raakt je kinderen, en via hen jou. Wat jij doet, raakt hen, en via hen je ex. Jullie leven in twee huizen, maar je kinderen leven in allebei.</p>
+      <p>Daarmee is de wederzijdse afhankelijkheid na een scheiding niet verdwenen. Ze is juist scherper zichtbaar geworden. Je kunt de ander uit je huis en uit je dagelijks leven halen, maar niet uit het leven van je kinderen. Wie de verbinding toch probeert te verbreken, merkt dat de kinderen tussen de brokstukken komen te staan.</p>
+      <p>Dat kan als een gevangenis voelen. Het kan ook anders gelezen worden: jullie zijn allebei autonoom in je eigen huis, en wederzijds afhankelijk in één ding, het welzijn van jullie kinderen. Die verdeling helder krijgen (wat is van mij, wat is van jou, wat is van ons) is een groot deel van het werk. <a href="#grenzen">Hoofdstuk 7</a> werkt dat uit.</p>
+
+      <h3>Wat de een doet, komt bij allebei terug</h3>
+      <p>Wederzijdse afhankelijkheid heeft een harde kant. Als een van beide ouders stopt met bijdragen (afspraken laat lopen, informatie achterhoudt, de ander zwartmaakt), lijkt dat even voordeel op te leveren: minder moeite, meer gelijk. Maar de kosten verdwijnen niet. Ze komen bij de kinderen terecht, en via de kinderen weer bij beide ouders. Een kind dat klem zit, is in beide huizen een kind dat klem zit. Andersom werkt het net zo: wat de een investeert in rust en voorspelbaarheid, komt in beide huizen terug.</p>
+      <p>Voor je kinderen is de verbinding nog dieper. Een kind is gemaakt van twee ouders: van ieder van hen de helft, en daarbij alles wat het van elk van hen leert. Een kind kan zich niet losmaken van de helft van zichzelf. Daarom raakt elke aanval op de andere ouder het kind ook zelf.</p>
+      <p class="key">Een model dat ernaast kan zitten, autonoom en toch wederzijds afhankelijk, met de kinderen als brug die blijft: dat is het vertrekpunt. Alles hieronder volgt daaruit.</p>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section id="leren" class="prose">
+    <h2><span class="n">2</span>Een model dat leert</h2>
+    <div class="body">
+      <h3>Leren is bijstellen op wat er terugkomt</h3>
+      <p>Een model dat ernaast kan zitten, blijft alleen bruikbaar als het leert. Leren is een kringloop: je handelt vanuit je model, de wereld reageert, en wat terugkomt stelt je model bij. Wat werkt, houd je vast. Wat telkens niet blijkt te kloppen, pas je aan. Zo werken je hersenen: een netwerk van verbindingen dat verandert door wat het meemaakt.</p>
+      <p>Daarbij tellen twee dingen:</p>
+      <ul class="rules">
+        <li><strong>De controle komt van buiten.</strong> Je kunt je eigen model niet van binnenuit nakijken, want van binnen voelt alles kloppend. Of het past bij de werkelijkheid, laat alleen de werkelijkheid zien: de gevolgen van wat je doet, feiten, en andere mensen die zien wat jij mist. Die signalen bereiken je via je verbindingen met anderen. Daarom bestaat een lerend model via anderen.</li>
+        <li><strong>Leren is vasthouden én loslaten.</strong> Een model dat bij elk nieuw signaal alles omgooit, is net zo onbruikbaar als een model dat nooit verandert. Je bewaart wat bewezen werkt en stelt bij wat herhaaldelijk niet klopt. Eén incident is ruis, een patroon is een signaal.</li>
+      </ul>
+
+      <h3>Een vastgezet model raakt uit de pas</h3>
+      <p>Je situatie staat niet stil. Kinderen groeien, er komen nieuwe partners, mensen veranderen, en jij ook. Wie zijn beeld van de ander vastzet (<em>zo is hij nu eenmaal</em>, <em>zo blijft ze altijd</em>), raakt vroeg of laat uit de pas met hoe het werkelijk is. Zo'n vast beeld kan een tijd meegaan, maar het gaat steeds meer kosten: misverstanden, gemiste kansen, onnodige strijd.</p>
+      <p>Dat betekent niet dat je naïef moet zijn. Een beeld dat keer op keer bevestigd wordt, mag je houden. Maar houd het open voor wat verandert. Een model dat blijft leren, blijft bij.</p>
+
+      <h3>Elk stuk van je model heeft een herkomst</h3>
+      <p>Alles in je model is ergens geleerd: in je jeugd, in je huwelijk, in de scheiding. De vraag <em>waar, wanneer, waarom en van wie heb ik dit geleerd?</em> geeft een reactie haar herkomst. Dan kun je één les bekijken, houden of bijstellen, zonder jezelf als geheel af te wijzen. De rest blijft staan.</p>
+      <p>Dat geldt ook voor je ex. Wat je in hem of haar ziet, is ook ergens geleerd, vaak lang voordat jullie elkaar kenden. Wie de herkomst van een reactie ziet, hoeft die minder persoonlijk te nemen.</p>
+
+      <h3>Leren kost energie, op meerdere rekeningen</h3>
+      <p>Leren en zorgen kosten iets, en niet op één rekening maar op meerdere: tijd, slaap, geld, gezondheid, contact met anderen en rust in je hoofd. Een overschot op de ene rekening dekt geen tekort op de andere. Geld lost slaapgebrek niet op, en tijd lost eenzaamheid niet op.</p>
+      <p>Wie uitgeput is, leert slechter: er is geen ruimte meer om signalen te wegen, alleen nog om te overleven. En wie voor anderen zorgt, houdt dat alleen vol zolang er op elke rekening genoeg overblijft en er van buitenaf iets terugkomt: steun, een avond vrij, iemand die luistert. Voor jezelf zorgen is dus geen luxe en geen egoïsme. Het is de voorwaarde om te kunnen blijven leren, en om voor je kinderen te kunnen blijven zorgen.</p>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section id="gedrag" class="prose">
+    <h2><span class="n">3</span>Leren hangt af van gedrag</h2>
+    <div class="body">
+      <p class="intro">Hier zit de kern. Of je model goed leert, hangt niet af van hoe slim je bent of hoe goed je het bedoelt. Het hangt af van wat je doet.</p>
+      <p>Gedrag bepaalt welke signalen er bij je binnenkomen, hoe je ermee omgaat, en of anderen je nog kunnen corrigeren. Daarmee bepaalt gedrag hoe goed je model werkt.</p>
+
+      <h3>Drie plekken waar het leren kan haperen</h3>
+      <ul class="rules">
+        <li><strong>Wat er binnenkomt.</strong> Een model is zo goed als wat erin gaat. Wie alleen nog luistert naar mensen die het met hem eens zijn, krijgt een eenzijdig beeld. Wie liegt, overdrijft of dingen weglaat, vervuilt het model van de ander, en daarmee ook wat er later bij hemzelf terugkomt.</li>
+        <li><strong>Hoe het bijgesteld wordt.</strong> Onder spanning stel je je model bij op basis van angst in plaats van op basis van wat er gebeurt. Je ziet in alles bevestiging van je ergste vermoeden, en wat daar niet in past, zie je niet.</li>
+        <li><strong>De routes waarlangs je gecorrigeerd kunt worden.</strong> Wie iedereen wegzet die hem tegenspreekt, het contact volledig afsnijdt, of nooit erkent dat iets anders zat, sluit de route af waarlangs fouten zichtbaar worden. Een fout die niet meer zichtbaar kan worden, blijft bestaan.</li>
+      </ul>
+
+      <table class="oc">
+        <thead><tr><th scope="col">Gedrag dat het leren openhoudt</th><th scope="col">Gedrag dat het leren afsluit</th></tr></thead>
+        <tbody>
+          <tr><td>Eerlijk doorgeven wat er is, ook als het jou niet goed uitkomt</td><td>Vervormen, overdrijven, weglaten</td></tr>
+          <tr><td>Vragen en nagaan wat er bedoeld werd</td><td>Gaten invullen met de slechtste verklaring</td></tr>
+          <tr><td>Tegenspraak toelaten, ook van mensen dichtbij</td><td>Alleen nog praten met medestanders</td></tr>
+          <tr><td>Je redenering laten zien, niet alleen je conclusie</td><td>Alleen verwijten en eindoordelen</td></tr>
+          <tr><td>Herstellen als het misging</td><td>Een breuk laten voortbestaan</td></tr>
+          <tr><td>Op tijd rust nemen en hulp vragen</td><td>Doorgaan tot je leeg bent</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Waarom het leren onder spanning dichtklapt</h3>
+      <p>Wat hieronder staat, zijn geen karakterfouten. Het zijn de manieren waarop een lerend model onder druk dichtklapt. Ze gelden voor je ex, en net zo goed voor jou.</p>
+      <p><strong>Het alarmsysteem neemt het over.</strong> Je hersenen hebben een alarmsysteem dat sneller werkt dan je denken. Bij dreiging, zoals een kritisch bericht, een gemiste afspraak of een opmerking via de kinderen, slaat het aan: vechten, vluchten, bevriezen of sussen. Psychologen spreken van een <em>venster van tolerantie</em>. Binnen dat venster kun je spanning voelen en toch nadenken, luisteren en kiezen. Daarbuiten neemt een lerend model niets nieuws meer op en verdedigt het alleen nog wat het al dacht. Een bericht dat je om elf uur 's avonds na een moeizame overdracht schrijft, komt meestal van buiten je venster. Dat van je ex vaak ook.</p>
+      <p><strong>Verlies en dreiging tegelijk.</strong> In een scheiding verlies je tegelijk een partner, een toekomstbeeld, tijd met je kinderen, vaak ook geld of een huis, en soms een deel van je vriendenkring. Achter boosheid zit heel vaak angst of verdriet. Rouw gaat bovendien niet in een rechte lijn en niet bij iedereen tegelijk. Wie de relatie beëindigde, heeft vaak al een deel van de rouw achter de rug. Wie verlaten werd, begint dan pas. Jullie modellen staan dus op verschillende plekken, zonder dat iemand kwade wil hoeft te hebben.</p>
+      <p><strong>Gaten worden ingevuld met de slechtste verklaring.</strong> Waar informatie ontbreekt, vult je model zelf iets in. Bij iemand met wie je pijn hebt meegemaakt, kiest het bijna altijd de vijandigste verklaring. Bovendien zien we bij onszelf vooral de omstandigheden (<em>ik was moe, het was druk</em>) en bij de ander vooral het karakter (<em>hij doet het expres</em>). Een laat antwoord kan onverschilligheid zijn. Het kan ook een lege telefoon zijn. Vaak weet je het gewoon niet.</p>
+      <p><strong>Patronen houden zichzelf in stand.</strong> Conflicten tussen ex-partners zijn zelden losse incidenten. Het zijn kringlopen: de een bekritiseert, de ander verdedigt zich, de eerste wordt minachtend, de tweede sluit zich af, en dat afsluiten wordt weer als aanval gelezen. Relatieonderzoeker John Gottman zag bij duizenden stellen dat juist die vier (kritiek, verdediging, minachting en muren optrekken) relaties slopen, en dat het verschil zat in <em>herstelpogingen</em>: kleine gebaren die de spanning breken.</p>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section id="relatie" class="prose">
+    <h2><span class="n">4</span>Van gedrag naar een betere relatie</h2>
+    <div class="body">
+      <p class="intro">Jullie zijn niet één lerend model, maar twee, of meer, die via de kinderen met elkaar verbonden blijven en op elkaar reageren. Dat betekent: wat jij doet, is wat de ander leert.</p>
+
+      <figure class="loop">
+        <svg class="lp-wide" viewBox="0 0 560 290" role="img" aria-labelledby="lp-title lp-desc">
+          <title id="lp-title">Twee lerende modellen die elkaars bewijs leveren</title>
+          <desc id="lp-desc">Jouw gedrag gaat naar het model van je ex, het gedrag van je ex gaat naar jouw model. De kinderen kijken naar allebei en leren van allebei.</desc>
+          <defs>
+            <marker id="lp-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" class="lp-head"/>
+            </marker>
+          </defs>
+          <rect class="lp-node" x="10" y="55" width="190" height="95" rx="12"/>
+          <text class="lp-t" x="105" y="96" text-anchor="middle">Jouw model</text>
+          <text class="lp-s" x="105" y="120" text-anchor="middle">van wat er speelt</text>
+          <rect class="lp-node" x="360" y="55" width="190" height="95" rx="12"/>
+          <text class="lp-t" x="455" y="96" text-anchor="middle">Model van je ex</text>
+          <text class="lp-s" x="455" y="120" text-anchor="middle">van wat er speelt</text>
+          <line class="lp-arrow" x1="204" y1="85" x2="354" y2="85" marker-end="url(#lp-ah)"/>
+          <text class="lp-l" x="280" y="73" text-anchor="middle">jouw gedrag</text>
+          <line class="lp-arrow" x1="356" y1="122" x2="206" y2="122" marker-end="url(#lp-ah)"/>
+          <text class="lp-l" x="280" y="144" text-anchor="middle">gedrag van je ex</text>
+          <path class="lp-dash" d="M105,150 C110,195 160,215 200,228"/>
+          <path class="lp-dash" d="M455,150 C450,195 400,215 360,228"/>
+          <rect class="lp-kids" x="190" y="205" width="180" height="70" rx="12"/>
+          <text class="lp-t" x="280" y="236" text-anchor="middle">Je kinderen</text>
+          <text class="lp-s" x="280" y="259" text-anchor="middle">leren van allebei</text>
+        </svg>
+        <svg class="lp-tall" viewBox="0 0 340 405" role="img" aria-labelledby="lp2-title">
+          <title id="lp2-title">Twee lerende modellen die elkaars bewijs leveren; de kinderen leren van allebei</title>
+          <defs>
+            <marker id="lp2-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" class="lp-head"/>
+            </marker>
+          </defs>
+          <rect class="lp-node" x="40" y="8" width="260" height="82" rx="12"/>
+          <text class="lp-t lp-big" x="170" y="45" text-anchor="middle">Jouw model</text>
+          <text class="lp-s lp-big" x="170" y="70" text-anchor="middle">van wat er speelt</text>
+          <line class="lp-arrow" x1="135" y1="94" x2="135" y2="174" marker-end="url(#lp2-ah)"/>
+          <text class="lp-l" x="125" y="139" text-anchor="end" style="font-size:15px">jouw gedrag</text>
+          <line class="lp-arrow" x1="205" y1="176" x2="205" y2="96" marker-end="url(#lp2-ah)"/>
+          <text class="lp-l" x="215" y="139" style="font-size:15px">gedrag van je ex</text>
+          <rect class="lp-node" x="40" y="180" width="260" height="82" rx="12"/>
+          <text class="lp-t lp-big" x="170" y="217" text-anchor="middle">Model van je ex</text>
+          <text class="lp-s lp-big" x="170" y="242" text-anchor="middle">van wat er speelt</text>
+          <path class="lp-dash" d="M40,49 C4,140 4,300 70,350"/>
+          <path class="lp-dash" d="M170,262 L170,318"/>
+          <rect class="lp-kids" x="70" y="320" width="200" height="76" rx="12"/>
+          <text class="lp-t lp-big" x="170" y="353" text-anchor="middle">Je kinderen</text>
+          <text class="lp-s lp-big" x="170" y="378" text-anchor="middle">leren van allebei</text>
+        </svg>
+        <figcaption>Wat jij doet, is het bewijs waaruit de ander leert. Wat de ander doet, is het bewijs waaruit jij leert. En je kinderen, de brug tussen jullie, leren van allebei.</figcaption>
+      </figure>
+
+      <h3>Jouw gedrag is het bewijs in het model van de ander</h3>
+      <p>Je ex heeft een model van jou, zoals jij er een hebt van hem of haar. Dat model is gebouwd uit jaren ervaring, en voor een deel uit de pijnlijkste momenten. Je kunt er niet in om het te veranderen. Uitleg en discussie helpen zelden: een model dat zich bedreigd voelt, verdedigt zich.</p>
+      <p>Wat wel binnenkomt, is gedrag. Elke afspraak die je nakomt, elk rustig bericht, elke overdracht zonder verwijt is een nieuw stukje bewijs.</p>
+      <p class="key">Je kunt de ander niet overtuigen. Je kunt wel bewijs leveren.</p>
+      <p>Dat werkt ook andersom. Wat je ex doet, is jouw bewijs. Je hoeft het niet mooier te maken dan het is, maar je kunt het wel zien voor wat het is: ook de kleine dingen die wél goed gaan.</p>
+
+      <h3>Een model verandert langzaam, door herhaling</h3>
+      <p>Eén goed gesprek verandert weinig. Modellen houden vast aan wat ze kennen, en dat is ook verstandig, anders zouden ze bij elk toeval omslaan. Een incident is ruis, een patroon is een signaal. Pas als ander gedrag zich vaak genoeg herhaalt, pikt het model van de ander het op. Dat duurt maanden, soms jaren.</p>
+      <p>Het omgekeerde geldt helaas ook: één uitbarsting kan veel opgebouwd vertrouwen tijdelijk overschaduwen. Dat is geen onrecht, zo werken modellen. Het is wel een reden om juist op moeilijke momenten je venster te bewaken.</p>
+
+      <h3>Vertrouwen is een geleerde verwachting</h3>
+      <p>Vertrouwen is niets anders dan een model dat voorspelt dat de ander zich aan afspraken houdt. Het groeit met nagekomen afspraken, en het groeit in twee richtingen. Zolang jullie allebei iets geven (op tijd zijn, informatie delen, flexibel zijn bij ziekte), houdt de samenwerking zichzelf in stand. Wie stopt met geven, wint soms even, maar verliest daarna de inzet van de ander, en uiteindelijk wat jullie allebei nodig hebben. Dat zie je in elke samenwerking die lang moet duren.</p>
+      <p>Zie de samenwerking daarom als een kleine gedeelde voorraad waar jullie allebei uit putten: goodwill, flexibiliteit, de bereidheid om eens te ruilen. Die voorraad kan een tijdje ongelijk gebruikt worden, zolang hij zich kan herstellen. Wie er meer uit haalt dan erin terugkomt, put hem uit. Dan betaalt iedereen, en de kinderen het meest.</p>
+
+      <h3>Herstel maakt van een breuk een vertraging</h3>
+      <p>Verbindingen raken beschadigd, dat is onvermijdelijk. Zonder herstel blijft een breuk een breuk: de correctie die van buiten moet komen, bereikt jou niet meer, en de ander ook niet. Met herstel wordt een breuk een vertraging. Een simpel <em>dat liep niet goed, sorry</em> houdt de route open. En een onhandige herstelpoging van de ander aannemen, doet hetzelfde.</p>
+
+      <h3>Andere modellen praten mee</h3>
+      <p>Het model van je ex wordt niet alleen door jou gevoed. Een nieuwe partner, familie, vrienden, soms een advocaat: zij vullen het aan, filteren het en kunnen een beeld versterken. Een nieuwe partner kent meestal maar één versie van het verhaal en verdedigt die uit loyaliteit, soms feller dan de ouder zelf. Daar spelen gewone gevoelens mee: onzekerheid, jaloezie, de wens om een eigen plek te hebben. Voor jouw kring geldt hetzelfde.</p>
+      <p>Op die filters heb je geen invloed. Wat je wel kunt doen: je eigen signaal zo helder en consequent houden dat het ook door een filter heen herkenbaar blijft. En bij jezelf nagaan of jouw kring je beeld alleen bevestigt, of het ook durft te corrigeren.</p>
+
+      <h3>Een inspanningsverplichting, geen resultaatsverplichting</h3>
+      <p>Het Nederlandse recht kent een bruikbaar onderscheid: een <em>inspanningsverplichting</em> tegenover een <em>resultaatsverplichting</em>. Een relatie maak je met z'n tweeën. Je kunt dus niet beloven dat het goed wordt, want dat ligt deels buiten je macht. Je kunt wel de inspanning leveren die het mogelijk maakt dat het beter wordt. Meer wordt er niet van je gevraagd, en minder ook niet.</p>
+      <p>De wet zegt hier trouwens zelf iets over: volgens artikel 1:247 lid 3 van het Burgerlijk Wetboek omvat het ouderlijk gezag ook de verplichting om de ontwikkeling van de banden van je kind met de andere ouder te bevorderen.</p>
+
+      <div class="box safe" role="note">
+        <h3>Waar deze logica ophoudt</h3>
+        <p>Dit is hoe het in principe werkt, geen garantie. Het vraagt dat de ander ook leert, al is het traag. Bij iemand die bewust misleidt, dreigt of controleert, werkt het niet: dan wordt je goede gedrag gebruikt in plaats van beantwoord. Herstel is de moeite waard zolang het iets kan opleveren. Het is geen plicht om eindeloos terug te keren. Een relatie die niet te herstellen is, mag je terugbrengen tot het minimum dat de kinderen nodig hebben, of verlaten. Bij geweld of dreiging gaat veiligheid altijd voor: <strong>Veilig Thuis 0800-2000</strong>, en bij direct gevaar <strong>112</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section id="evenwicht" class="prose">
+    <h2><span class="n">5</span>Evenwicht tussen twee volwassenen</h2>
+    <div class="body">
+      <p class="intro">Wat hierboven over jou en je ex staat, geldt in principe voor elke relatie tussen twee volwassenen, getrouwd of niet. Een huwelijk is intensiever en heeft meer dimensies, maar vriendschap, familie en collega's werken ongeveer net zo.</p>
+
+      <h3>Twee manieren om uit balans te raken</h3>
+      <p>Elke relatie vraagt dat je twee dingen tegelijk vasthoudt: wat jij nodig hebt, en wat de ander nodig heeft. Onder spanning schuift ieder mens naar een van twee kanten.</p>
+      <ul class="rules">
+        <li><strong>Overgevoelig voor de ander.</strong> Je past je aan, sust, maakt jezelf klein en leest in elke beweging van de ander een dreiging. Wat jij nodig hebt, verdwijnt naar de achtergrond.</li>
+        <li><strong>Ongevoelig voor de ander.</strong> Je eigen gelijk en je eigen behoefte gaan voor. De ander wordt een obstakel of een middel, en signalen die niet in je beeld passen, komen niet meer binnen.</li>
+        <li><strong>Het evenwicht daartussen.</strong> Je voelt wat de ander nodig heeft en houdt toch vast aan wat jij nodig hebt. Je kunt geven zonder jezelf kwijt te raken, en nemen zonder de ander kwijt te raken.</li>
+      </ul>
+      <p>Dit zijn toestanden, geen typen. Iedereen kent beide kanten, jij ook en je ex ook. Sommige mensen schieten zelfs heen en weer: de ene keer klampen ze zich vast, de andere keer duwen ze weg. Daarom helpen etiketten zo weinig. Ze zetten iemand vast aan één kant, terwijl het gedrag beweegt. Volwassen zijn betekent niet dat je nooit uit balans raakt. Het betekent dat je steeds weer terugkomt.</p>
+
+      <h3>Evenwicht is iets wat je samen doet</h3>
+      <p>Het evenwicht is wankel, net als een stok die je op je hand balanceert: hij blijft alleen staan zolang je bijstuurt. In een goede relatie doen twee mensen dat voor elkaar. Is de een moe, ziek of overbelast, dan vangt de ander iets op, en een andere keer gaat het andersom. Ieder beweegt mee met de ander, en zo houden ze elkaar overeind. Dat is geen toestand die je bereikt, maar een leerproces van geven en nemen dat nooit af is.</p>
+      <p>Een huwelijk doet dat op veel dimensies tegelijk: geld, huis, lichaam, tijd, kinderen, familie, toekomst. Daardoor is het intensiever, en raakt een scheefheid op één terrein al snel de rest. Een vriendschap balanceert op minder dimensies en met minder op het spel, maar het principe is hetzelfde. Een vriendschap waarin altijd dezelfde persoon belt, luistert en toegeeft, is uit balans, hoe gezellig het ook lijkt.</p>
+
+      <h3>Vier mogelijkheden</h3>
+      <p>Zet twee mensen naast elkaar en je ziet steeds dezelfde patronen terug:</p>
+      <ul class="rules">
+        <li><strong>Allebei in evenwicht.</strong> Allebei bewegen ze mee, allebei geven en nemen ze. Het is wankel en vraagt onderhoud, maar het leeft: de relatie kan groeien, en ieder blijft zichzelf.</li>
+        <li><strong>De een past zich aan, de ander neemt.</strong> Dit lijkt vaak rustig, omdat het precies op elkaar aansluit. Maar het kost één persoon steeds meer, en die persoon wordt steeds kleiner.</li>
+        <li><strong>Allebei ongevoelig.</strong> Strijd. Ieder wil gelijk krijgen, niemand beweegt, en elke ronde maakt de volgende harder.</li>
+        <li><strong>Allebei overgevoelig.</strong> Veel voorzichtigheid, weinig richting. Niemand zegt wat hij nodig heeft, conflicten worden vermeden, en de relatie verwatert langzaam.</li>
+      </ul>
+
+      <h3>Een scheve verhouding is stabieler dan een gezonde</h3>
+      <p>Dat klinkt vreemd, maar het volgt uit het voorgaande. Een verhouding waarin de een toegeeft en de ander neemt, vraagt van niemand dat hij beweegt. Daarom houdt zo'n verhouding het zo lang vol, en daarom glijd je er zo makkelijk in terug, ook in een nieuwe relatie. Het gezonde evenwicht kost voortdurend moeite. Dat is geen teken dat er iets mis is. Zo werkt evenwicht.</p>
+      <p>Eén persoon kan het evenwicht ook niet alleen dragen. Als de ander niet meer meebeweegt, gebeurt er iets voorspelbaars: jij gaat al het bijsturen doen. Dat is uitputtend, en het duwt je vanzelf naar een van de twee kanten. Je gaat je aanpassen en sussen, of je slaat terug en wordt zelf hard. In beide gevallen blijft het patroon bestaan.</p>
+
+      <h3>Waar je op kunt letten</h3>
+      <p>Kijk naar het patroon, niet naar één moment. Elke relatie heeft slechte dagen. De vraag is wat er over maanden gebeurt.</p>
+      <table class="oc">
+        <thead><tr><th scope="col">Tekenen van evenwicht</th><th scope="col">Tekenen van scheefheid</th></tr></thead>
+        <tbody>
+          <tr><td>Geven en nemen gaat over de tijd heen beide kanten op</td><td>Het is altijd dezelfde die geeft, belt, regelt of toegeeft</td></tr>
+          <tr><td>Je kunt nee zeggen zonder dat de relatie wankelt</td><td>Je loopt op eieren en oefent gesprekken vooraf in je hoofd</td></tr>
+          <tr><td>Tegenspraak leidt tot bijstellen, bij allebei</td><td>Tegenspraak leidt tot straf, stilte of een nieuwe ruzie</td></tr>
+          <tr><td>Na een ruzie zet iemand een stap, en die stap wordt aangenomen</td><td>Excuses komen steeds van één kant, of van geen van beide</td></tr>
+          <tr><td>Als jouw leven verandert, beweegt de ander mee, en andersom</td><td>Afspraken gelden alleen voor één van beiden</td></tr>
+          <tr><td>Na contact voel je je meestal even veel jezelf, of meer</td><td>Na contact voel je je kleiner, of ben je vooral bezig met de stemming van de ander</td></tr>
+        </tbody>
+      </table>
+      <p>Kijk daarbij ook naar jezelf, en dan naar beide kanten. Merk je dat je jezelf steeds wegcijfert? Dan zit je aan de overgevoelige kant. Merk je dat de ander zich steeds aanpast, dat jij meestal gelijk krijgt en dat je niet meer vraagt hoe het met de ander gaat? Dan zit je misschien aan de andere kant. Dat is ongemakkelijk om te zien, maar het is precies de informatie waarvan je leert.</p>
+
+      <h3>Wat je zoekt in een relatie</h3>
+      <p>Niet iemand die nooit uit balans raakt, want die bestaat niet. Wel iemand die meebeweegt, met wie herstel lukt, en bij wie je je eigen evenwicht kunt houden. Dat geldt voor een nieuwe partner, voor vrienden en voor de mensen in je kring. Je ziet het vaak al vroeg: hoe gaat iemand om met een nee, met een fout, met een kleine teleurstelling? Hoe iemand herstelt, zegt meer dan hoe iemand zich op zijn best gedraagt.</p>
+      <p>En je zoekt het ook bij jezelf: je eigen vermogen om terug te komen naar het midden. Dat is het enige deel van het evenwicht waar je zelf volledig over gaat.</p>
+
+      <h3>Als samen balanceren niet lukt</h3>
+      <p>Na een scheiding is het samen balanceren vaak weggevallen, soms al lang daarvoor. Dan helpt het niet om harder bij te sturen. Wat helpt, is de koppeling losser maken: minder contactmomenten, vaste afspraken, één kanaal. Daarom werkt <a href="#omgaan">parallel ouderschap</a> zo vaak. Je hoeft het evenwicht niet meer samen te dragen. Je hoeft alleen je eigen evenwicht te bewaren, en de ander de ruimte te laten om in zijn of haar eigen tempo terug te komen.</p>
+      <p>Voor vriendschappen en andere relaties geldt hetzelfde. Een relatie die steeds scheef blijft, mag je losser maken of beëindigen. Dat is geen falen, maar zorg voor je eigen balans. En als scheefheid samengaat met angst, dreiging of controle, dan gaat het niet meer om evenwicht maar om veiligheid: zie <a href="#grenzen">het kader bij grenzen</a>.</p>
+      <p class="key">Evenwicht is wankel en iets wat je samen doet. Je kunt het niet afdwingen bij de ander. Je kunt wel steeds zelf terugkomen naar het midden.</p>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section id="omgaan" class="prose">
+    <h2><span class="n">6</span>Wat je doet: jezelf en je ex</h2>
+    <div class="body">
+      <p class="intro">Uit de lijn hierboven volgen gedragsregels. Het zijn geen morele geboden, maar praktische gevolgen. Ze dienen twee doelen: je eigen model goed laten leren, en de ander goed bewijs geven.</p>
+
+      <h3>Zodat je zelf goed blijft leren</h3>
+      <ul class="rules">
+        <li><strong>Eerst terug in je venster, dan pas reageren.</strong> Berichten die niet dringend zijn, hoeven niet direct beantwoord te worden. Een regel van 24 uur helpt. Begin bij je lichaam: adem langzaam uit, loop een rondje, drink water. Schrijf het boze antwoord gerust op, maar verstuur het niet.
+          <span class="why">Buiten je venster leert je model niet, het verdedigt alleen.</span></li>
+        <li><strong>Vraag je af: waar heb ik dit geleerd?</strong> Is je reactie veel groter dan de aanleiding, dan raakt het vaak iets ouds. Geef die reactie haar herkomst, en bekijk dan of ze hier en nu nog klopt.
+          <span class="why">Je kunt één les bijstellen zonder jezelf als geheel af te wijzen.</span></li>
+        <li><strong>Houd mensen dichtbij die je eerlijk durven tegenspreken.</strong> Vrienden die je ex ook verschrikkelijk vinden voelen fijn, maar ze bevestigen vooral je eigen model. Je hebt minstens één persoon nodig die zegt: <em>dit bericht zou ik niet sturen.</em>
+          <span class="why">Zonder tegenspraak sluit de route waarlangs je fouten zichtbaar worden.</span></li>
+        <li><strong>Toets je verklaring voor je reageert.</strong> Vraag je af: welke andere verklaring is er nog mogelijk? Weet ik dit, of vul ik het in? Bij twijfel vraag je het, zonder verwijt: <em>ik begreep niet helemaal wat je bedoelde met...</em>
+          <span class="why">Een gat in je model vul je beter met informatie dan met je ergste vermoeden.</span></li>
+        <li><strong>Bewaak al je rekeningen.</strong> Plan herstel bewust in: slaap, beweging, een avond per week die van jou is, contact met mensen die niets met de scheiding te maken hebben. Vraag hulp voordat een rekening leeg is, niet pas daarna.
+          <span class="why">Een uitgeput model leert niet meer, het overleeft alleen.</span></li>
+      </ul>
+
+      <h3>Zodat de ander iets goeds van je leert</h3>
+      <ul class="rules">
+        <li><strong>Zie het als een zakelijke samenwerking</strong> rond één gezamenlijk project: jullie kinderen. Je hoeft elkaar niet aardig te vinden. Je moet wel betrouwbaar, voorspelbaar en beleefd zijn, zoals tegenover een collega met wie je het niet altijd eens bent.
+          <span class="why">Voorspelbaar gedrag is het duidelijkste signaal dat een ander model kan oppikken.</span></li>
+        <li><strong>Lukt samenwerken niet, ouder dan naast elkaar.</strong> Bij veel strijd is samen opvoeden soms te veel gevraagd. Dan werkt <em>parallel ouderschap</em> beter: heldere afspraken, weinig contact, elk huis zijn eigen regels, en alleen overleg over de grote dingen zoals school, gezondheid en geld. Dat is geen falen maar een verstandige tussenvorm, die later soms weer ruimte geeft voor meer samenwerking.
+          <span class="why">Minder contactmomenten betekent minder kans dat jullie modellen in alarm schieten, en meer rust om bewijs op te bouwen.</span></li>
+        <li><strong>Eén kanaal, schriftelijk, alleen over de kinderen.</strong> Bijvoorbeeld e-mail of een co-ouderschapsapp. Geen discussies over het verleden, niet via de kinderen en niet via sociale media.
+          <span class="why">Een helder kanaal houdt het signaal schoon, voor allebei.</span></li>
+        <li><strong>Kort, informatief, vriendelijk en duidelijk.</strong> Dit is de BIFF-methode van Bill Eddy (<em>brief, informative, friendly, firm</em>). Je reageert op de inhoud, niet op de toon. Niet elke beschuldiging verdient een antwoord: wie zich verdedigt, nodigt uit tot de volgende ronde.
+          <span class="msgs" role="group" aria-label="Voorbeeld">
+            <span class="msg in"><span class="who">Binnengekomen</span>Je bent ALWEER vergeten dat Sem zijn gymspullen nodig had. Typisch. Het interesseert je gewoon niet.</span>
+            <span class="msg out"><span class="who">Antwoord</span>Hoi, dank dat je het laat weten. Ik stop de gymtas voortaan op vrijdagavond al in zijn rugzak. Groet.</span>
+          </span>
+          <span class="why">Je geeft de ander geen nieuw bewijs voor het oude beeld, maar wel een kleine aanwijzing voor een nieuw.</span></li>
+        <li><strong>Kom afspraken na, ook de kleine.</strong> Op tijd bij de overdracht, de beloofde informatie doorsturen, een wijziging ruim van tevoren melden. Gaat het een keer mis, zeg dat dan zelf.
+          <span class="why">Elke nagekomen afspraak is een datapunt. Vertrouwen is wat er groeit als die datapunten zich opstapelen.</span></li>
+        <li><strong>Laat ook jouw vertrouwen meegroeien met het bewijs.</strong> Geef vertrouwen in kleine stappen: gaat een afspraak goed, dan kan de volgende iets groter zijn. Gaat het mis, stel dan je verwachting bij, zonder er een oordeel over de hele persoon van te maken. Let op het patroon, niet op het etiket.
+          <span class="why">Een model dat weegt op het werkelijke gedrag, blijft in de pas met hoe de ander nu is.</span></li>
+        <li><strong>Herstel waar het kan, en neem herstel aan.</strong> <em>Dat was niet handig van mij, sorry</em> kost weinig en maakt veel goed. Doet je ex een onhandige poging om iets te herstellen, neem die dan aan, ook als hij niet perfect is.
+          <span class="why">Herstel maakt van een breuk een vertraging.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section id="grenzen" class="prose">
+    <h2><span class="n">7</span>Grenzen stellen</h2>
+    <div class="body">
+      <p class="intro">Een grens lijkt het tegenovergestelde van openstaan voor correctie. Dat is het niet. Een lerend model moet kunnen filteren: de inhoud erin, de aanval eruit.</p>
+      <p>Een goede grens bepaalt welke signalen je toelaat en welke je uitzendt. Hij houdt de toon buiten, niet de inhoud. Wat je niet moet afsnijden, is de route waarlangs je zelf gecorrigeerd kunt worden, en de verbinding die je kinderen nodig hebben. En een grens is geen straf en geen eis aan de ander. Een grens gaat over wat jíj doet.</p>
+      <p>Grenzen zijn de praktische vorm van autonoom en toch wederzijds afhankelijk zijn: helder over wat van jou is, loslaten wat van de ander is, en zorgvuldig zijn met wat jullie delen.</p>
+      <ul class="rules">
+        <li><strong>Formuleer een grens als je eigen gedrag.</strong> Niet: <em>je mag me niet meer uitschelden.</em> Wel: <em>als een bericht scheldwoorden bevat, reageer ik alleen op het praktische deel.</em> Of: <em>als het bij de overdracht oploopt, zeg ik dat we het per mail afmaken, en ga ik naar binnen.</em> Zo'n grens kun je zelf waarmaken, wat de ander ook doet.</li>
+        <li><strong>Weinig grenzen, concreet, en altijd.</strong> Drie grenzen die je altijd houdt, werken beter dan tien die je soms houdt. Gedrag dat af en toe toch beloond wordt, houdt zich het langst in stand. Ook een grens is een signaal, en het model van de ander leert alleen van een signaal dat consequent is.</li>
+        <li><strong>Ken de drie gebieden.</strong> Er is wat van jou is (jouw huis, jouw tijd, jouw regels), wat gedeeld is (grote beslissingen over de kinderen, het ouderschapsplan), en wat van de ander is (diens huis, regels, nieuwe partner en vrije tijd). Over het eerste beslis je zelf, over het tweede overleg je, en het derde laat je los, ook als je het zelf anders zou doen. Het eerste en het derde zijn jullie autonomie, het tweede is jullie wederzijdse afhankelijkheid. Kinderen kunnen goed leven in twee huizen met verschillende regels, zolang elk huis voorspelbaar is.</li>
+        <li><strong>Een grens beschermt de verbinding die nodig is.</strong> Jullie zijn nog jaren samen ouder. Een goede grens maakt dat contact draaglijk, zodat het kan blijven bestaan. Het doel is niet om de ander buiten te sluiten, maar om het contact zo in te richten dat het minder kapotmaakt.</li>
+        <li><strong>Met de nieuwe partner van je ex:</strong> beleefd, kort en respectvol. Hij of zij is niet je vijand, en ook niet de ouder. Grote beslissingen over de kinderen bespreek je met de andere ouder, niet met diens partner, tenzij jullie dat samen zo afspreken. Spreek tegen de kinderen nooit negatief over de nieuwe partner: zij moeten ook met die persoon een plek vinden.</li>
+        <li><strong>Met je eigen nieuwe partner:</strong> neem de tijd, houd het ouderschap bij jezelf, en vraag je partner niet om jouw strijd met je ex te voeren. Onderzoek naar stiefgezinnen (onder meer van Patricia Papernow) laat zien dat het meestal beter gaat als een nieuwe partner eerst een band opbouwt, en het opvoeden en grenzen stellen voorlopig bij de eigen ouder laat.</li>
+      </ul>
+
+      <div class="box safe" role="note">
+        <h3>Bij onveiligheid gelden andere regels</h3>
+        <p>Alles over herstel en samenwerking geldt niet als er sprake is van geweld, bedreiging, stalking of dwingende controle. De verbinding in stand houden mag nooit betekenen dat je in iets schadelijks moet blijven. Dan gaat veiligheid voor, voor jou en je kinderen.</p>
+        <p>Bel voor advies <strong>Veilig Thuis: 0800-2000</strong> (gratis, dag en nacht, ook anoniem). Bij direct gevaar: <strong>112</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section id="kinderen" class="prose">
+    <h2><span class="n">8</span>Wat je kinderen nodig hebben</h2>
+    <div class="body">
+      <p class="intro">Je kinderen zijn lerende modellen in volle opbouw. Wat ze bij jullie zien, wordt hun model van hoe mensen met elkaar omgaan als het moeilijk is.</p>
+      <p>Kinderen leren meer van wat ze zien dan van wat ze horen. Hoe jullie met conflict omgaan, is de les die ze meenemen naar hun eigen vriendschappen en relaties. Dat is een zware verantwoordelijkheid, maar ook een hoopvolle: elke rustige overdracht is óók een les.</p>
+      <p>Daarbij zijn kinderen loyaal aan beide ouders, altijd. Ze houden van allebei, ook van een ouder die tekortschiet. Dat is geen keuze, zo werkt hechting. In de contextuele therapie (Ivan Boszormenyi-Nagy) heet dat <em>loyaliteit</em>: een onzichtbare draad die niet door te knippen is. Een kind dat merkt dat het van de ene ouder niet van de andere mag houden, komt klem te zitten. Kinderen in een strijdscheiding gaan dan vaak voor hun ouders zorgen, zeggen tegen elke ouder wat die wil horen, of houden hun gevoelens voor zich. Van buiten lijkt dat soms op <em>het gaat goed met hem</em>, terwijl het kind vooral heel hard werkt.</p>
+      <ul class="rules">
+        <li><strong>Een kind is geen boodschapper, vertrouweling, spion of rechter.</strong> Geef geen berichten mee, houd na een weekend bij de ander geen kruisverhoor, en vertel niet wat er tussen de volwassenen speelt.</li>
+        <li><strong>Spreek niet negatief over de andere ouder.</strong> Ook niet zachtjes, en ook niet met je gezicht. Een kind hoort dan: <em>de helft van mij deugt niet.</em></li>
+        <li><strong>Geef hardop toestemming om van iedereen te houden.</strong> <em>Je mag het fijn hebben bij papa. Het is goed als je haar nieuwe vriend aardig vindt.</em> Kinderen hebben die toestemming nodig, uitgesproken.</li>
+        <li><strong>Maak overgangen rustig en voorspelbaar.</strong> Vaste momenten, een vaste tas, geen discussies waar ze bij zijn. Na een wissel hebben kinderen vaak even tijd nodig om te landen. Dat zegt meestal niets over het andere huis.</li>
+        <li><strong>Luister, benoem, en los het niet voor ze op.</strong> <em>Je mist mama als je hier bent. Dat snap ik.</em> Je hoeft het gevoel niet weg te nemen. Een gevoel dat er mag zijn, wordt kleiner.</li>
+        <li><strong>Laat zien hoe je herstelt.</strong> Ging het mis waar ze bij waren, zeg dan later: <em>dat ging niet goed tussen papa en mij, en dat is niet jouw schuld.</em> Zo leren ze dat fouten hersteld kunnen worden.</li>
+        <li><strong>Laat ze weten waar ze zelf terechtkunnen.</strong> Bij <a href="https://www.villapinedo.nl/">Villa Pinedo</a> steunen jongeren met gescheiden ouders elkaar, onder meer met een online buddy (vanaf 10 jaar). De <a href="https://www.kindertelefoon.nl/">Kindertelefoon</a> (0800-0432) is er voor alle kinderen.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section id="vergeven" class="prose">
+    <h2><span class="n">9</span>Vergeef jezelf, en wees trots</h2>
+    <div class="body">
+      <h3>Waarom vergeven? Omdat het klopt met wat je bent.</h3>
+      <p>Je handelde steeds vanuit het model dat je op dat moment had: met wat je wist, wat je had geleerd, en hoeveel ruimte er was in je venster en op je rekeningen. Wat je nu weet, wist je toen niet. Achteraf oordeel je met informatie die je toen niet had.</p>
+      <p>Een fout is een signaal dat je model ergens niet klopte. Dat is precies het materiaal waarvan een lerend model leert. Wie zichzelf veroordeelt, gaat zich verdedigen, ook tegenover zichzelf, en verdedigen sluit het leren af. Onderzoek naar zelfcompassie (onder meer van Kristin Neff) laat zien dat mensen die mild zijn voor zichzelf eerder verantwoordelijkheid nemen en fouten herstellen, niet minder. Mildheid is dus geen excuus. Het is wat leren mogelijk houdt.</p>
+      <p>Jezelf vergeven betekent: zien wat er misging, je eigen deel daarvan nemen, die ene les bijstellen, en verdergaan. De rest van wie je bent, blijft staan.</p>
+      <p>En je ex vergeven? Dat hoeft niet. Vergeven is iets anders dan goedkeuren, iets anders dan weer vertrouwen, en zeker iets anders dan weer samen zijn. Wat wel helpt, is langzaam loslaten dat de ander ooit moet toegeven dat jij gelijk had. Bedenk wat het fundament zegt: jullie zijn allebei een model, en zekerheid is geen bewijs. Die erkenning komt misschien nooit, en je kinderen hebben er niets aan als je erop blijft wachten.</p>
+
+      <h3>Waarom trots? Omdat je bewijs levert in drie modellen tegelijk.</h3>
+      <p>Je houdt een gezin in twee huizen overeind, vaak grotendeels alleen, op meerdere rekeningen tegelijk. Elk stukje goed gedrag telt drie keer: in je eigen model, dat leert dat je het kunt; in het model van je ex, dat een nieuw beeld van je kan vormen; en in het model van je kinderen, dat leert hoe mensen omgaan met iets moeilijks. Elke rustige overdracht, elk bericht dat je niet verstuurde, elke keer dat je kind merkte dat het van de andere ouder mag houden, is een echte bijdrage aan de toekomst van je kind. Je ziet het nergens terug in een cijfer, en niemand bedankt je ervoor. Zeg het dan tegen jezelf.</p>
+      <p>Kinderen hebben geen perfecte ouders nodig. De kinderarts en psychoanalyticus Donald Winnicott sprak van de <em>goed genoeg</em>-ouder: een ouder die fouten maakt en ze herstelt. Juist van dat herstel leren kinderen dat relaties tegen een stootje kunnen.</p>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section id="werk" class="prose">
+    <h2><span class="n">10</span>Het blijft werk</h2>
+    <div class="body">
+      <p>Een lerend model is nooit af, omdat de wereld niet stilstaat. Kinderen groeien, en elke fase brengt nieuwe vragen: een andere school, de puberteit, een nieuwe partner, een verhuizing, een halfbroertje of halfzusje. Elke verandering vraagt opnieuw afstemming. Onder spanning komen oude patronen terug. Dat is normaal, en geen bewijs dat je niets hebt geleerd.</p>
+      <p>En de brug blijft, ook als de kinderen groot zijn: diploma-uitreikingen, een bruiloft, misschien ooit kleinkinderen. Wat jullie nu opbouwen, moet dan kunnen dragen.</p>
+      <p>Volwassenen leren vooral van ervaring, als ze er bewust op terugkijken: doen, terugkijken, begrijpen, aanpassen. Een vast moment per week met drie vragen helpt al:</p>
+      <ul class="plain">
+        <li>Wat ging er deze week goed tussen ons, voor de kinderen?</li>
+        <li>Waar raakte ik buiten mijn venster, en wat ging eraan vooraf?</li>
+        <li>Welk bewijs wil ik de komende week leveren, en wat doe ik één stap anders?</li>
+      </ul>
+      <p>Het wordt wel lichter. Wat je vaak oefent, kost steeds minder energie. Het rustige antwoord dat nu nog moeite kost, is na honderd keer een gewoonte. En wat bij de ander langzaam verandert, maakt het jou ook weer makkelijker. Zo kan de kringloop die eerst de strijd voedde, de samenwerking gaan voeden.</p>
+      <p>Je hoeft het niet alleen te doen. Een mediator, ouderschapscoach, psycholoog of je huisarts kan meedenken. Voor ouders die langdurig vastzitten in strijd bestaat het groepsprogramma <a href="https://www.kinderenuitdeknel.nl/">Kinderen uit de Knel</a>, voor ouders, kinderen en hun omgeving. Je komt daar meestal via een verwijzing van je huisarts, het wijkteam of de jeugdhulp. Hulp vragen is geen teken dat het je niet lukt. Het is een manier om het vol te houden.</p>
+    </div>
+  </section>
+
+  <!-- 11 -->
+  <section id="kort" class="closing" aria-label="In het kort">
+    <h2><span class="n">11</span>In het kort</h2>
+    <div>
+      <ol>
+        <li>Ik ben een model van de werkelijkheid, geen kopie. Zeker voelen is geen bewijs, niet bij mij en niet bij de ander.</li>
+        <li>Ik ben autonoom, en toch wederzijds afhankelijk. Onze kinderen zijn de brug die blijft.</li>
+        <li>Mijn model blijft alleen bruikbaar als het leert, en de controle komt van buiten: via anderen.</li>
+        <li>Of ik leer, hangt af van wat ik doe: wat ik binnenlaat, hoe ik bijstel, en of ik nog gecorrigeerd kan worden.</li>
+        <li>Eerst terug in mijn venster, dan pas reageren. En ik zorg voor al mijn rekeningen.</li>
+        <li>Mijn gedrag is het bewijs in het model van de ander. Ik kan niet overtuigen, wel bewijs leveren.</li>
+        <li>Een patroon telt, een incident niet. Vertrouwen groeit met nagekomen afspraken, in twee richtingen.</li>
+        <li>Evenwicht is wankel en iets wat je samen doet. Lukt dat niet, dan maak ik de koppeling losser en bewaak ik mijn eigen balans.</li>
+        <li>Kort, informatief, vriendelijk, duidelijk. Een grens gaat over wat ik doe, en houdt de toon buiten, niet de inhoud.</li>
+        <li>Herstel maakt van een breuk een vertraging.</li>
+        <li>Mijn kinderen leren van wat ze zien, en mogen van iedereen houden.</li>
+      </ol>
+      <p class="last">Vergeef jezelf. Wees trots. Blijf leren.</p>
+    </div>
+  </section>
+
+  <section id="bronnen" class="prose">
+    <h2>Hulp en achtergrond</h2>
+    <div class="body">
+      <h3 style="margin-top:0">Waar je terechtkunt</h3>
+      <ul class="plain">
+        <li><strong>Veilig Thuis</strong>: 0800-2000, gratis en dag en nacht bereikbaar, voor advies of een melding bij huiselijk geweld. Bij direct gevaar: 112.</li>
+        <li><strong>Kindertelefoon</strong>: 0800-0432, voor kinderen en jongeren tot 18 jaar.</li>
+        <li><strong><a href="https://www.villapinedo.nl/">Villa Pinedo</a></strong>: steun voor kinderen en jongeren met gescheiden ouders, en informatie voor ouders.</li>
+        <li><strong><a href="https://www.kinderenuitdeknel.nl/">Kinderen uit de Knel</a></strong>: groepsprogramma bij een langdurige strijdscheiding.</li>
+        <li>Je huisarts of het wijkteam in je gemeente, voor verwijzing naar een mediator, coach of psycholoog.</li>
+      </ul>
+      <h3>Waar deze tekst op steunt</h3>
+      <p>Het fundament is een eenvoudig model van leren: een mens als lerend netwerk dat een model van de werkelijkheid bijhoudt, dat alleen van buitenaf gecorrigeerd kan worden, en dat bestaat via zijn verbindingen met anderen. Daarop bouwen inzichten uit de psychologie, relatietherapie, pedagogiek, communicatie en het leren van volwassenen: hechtingstheorie; de klassieke driedeling passief, agressief en assertief; het venster van tolerantie (Dan Siegel); onderzoek naar wat relaties sloopt en herstelt (John Gottman); de BIFF-methode voor communicatie bij hoog conflict (Bill Eddy); parallel ouderschap; de contextuele therapie en het begrip loyaliteit (Ivan Boszormenyi-Nagy); onderzoek naar stiefgezinnen (Patricia Papernow); zelfcompassie (Kristin Neff); de goed-genoeg-ouder (Donald Winnicott); en de leercyclus van ervaringsleren (David Kolb).</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Deze tekst is bedoeld als basiskennis en vervangt geen professionele hulp. Elke situatie is anders. Twijfel je, of zit je vast, zoek dan iemand die met je meekijkt.</p>
+    <p><a href="/">← Terug naar de hoofdpagina</a></p>
+  </footer>
+</main>
+</body>
+</html>
