@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Who Is Reading This? · AJ van Hoek</title>
+<meta name="description" content="A short piece about the reader as a living network: not a thing that has parts, but what the parts do together.">
+<meta property="og:title" content="Who Is Reading This?">
+<meta property="og:description" content="You are not a noun. You are a verb. A short piece about being a living network.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://albertjanvanhoek.github.io/who-is-reading/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EDF1F0;
+    --ink: #17282C;
+    --muted: #4E6266;
+    --line: #C9D3D2;
+    --signal: #C9412F;
+    --kept: #2E6B73;
+    --tint: rgba(46, 107, 115, 0.09);
+    --kept-deep: #23565D;
+    --on-kept: #F3F7F6;
+    --display: "Bricolage Grotesque", system-ui, sans-serif;
+    --text: "Newsreader", Georgia, serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #101B1E;
+      --ink: #DCE6E4;
+      --muted: #93A6A8;
+      --line: #2A3A3D;
+      --signal: #F0705C;
+      --kept: #6FB3BA;
+      --tint: rgba(111, 179, 186, 0.08);
+      --kept-deep: #8CC6CC;
+      --on-kept: #0E1A1C;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--text);
+    font-size: 1.1875rem;
+    line-height: 1.6;
+  }
+  a { color: inherit; text-decoration-color: var(--signal); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  a:hover { color: var(--signal); }
+  :focus-visible { outline: 3px solid var(--signal); outline-offset: 3px; border-radius: 2px; }
+
+  .wrap { max-width: 68rem; margin: 0 auto; padding: 0 1.25rem; }
+
+  .home { display: inline-block; margin-top: 1.5rem; font-family: var(--display); font-weight: 600; font-size: 0.95rem; color: var(--kept); text-decoration: none; }
+  .home:hover { color: var(--signal); }
+
+  /* Hero */
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+    padding: 2.5rem 0 2.5rem;
+    align-items: center;
+  }
+  @media (min-width: 860px) {
+    .hero { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 3rem; padding: 4.5rem 0 4rem; min-height: 78vh; }
+  }
+  h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(2.9rem, 7.4vw, 5.6rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin: 0 0 1.75rem;
+  }
+  h1 .q { color: var(--signal); }
+  .opening { font-size: clamp(1.3rem, 2.2vw, 1.55rem); line-height: 1.45; max-width: 30ch; }
+  .opening p { margin: 0 0 0.9rem; }
+  .byline { color: var(--muted); font-family: var(--display); font-size: 0.95rem; margin: 2rem 0 0; }
+
+  figure.net { margin: 0; }
+  .net canvas { display: block; width: 100%; aspect-ratio: 1 / 1; max-height: 32rem; cursor: crosshair; border-radius: 6px; touch-action: manipulation; }
+  .net figcaption { font-size: 1rem; line-height: 1.5; color: var(--muted); margin-top: 0.75rem; max-width: 38rem; }
+  .net figcaption p { margin: 0 0 0.4rem; font-style: italic; }
+  .net figcaption .hint { font-style: normal; font-size: 0.9rem; }
+
+  /* The piece: one movement per section */
+  section.mv { border-top: 1px solid var(--line); padding: 3rem 0; }
+  @media (min-width: 860px) {
+    section.mv { display: grid; grid-template-columns: 14rem minmax(0, 40rem); gap: 3rem; padding: 4.5rem 0; }
+  }
+  .mark { margin: 0 0 1.25rem; font-family: var(--display); color: var(--kept); }
+  .mark .n { display: block; font-weight: 800; font-size: 2.4rem; line-height: 1; letter-spacing: -0.03em; opacity: 0.35; }
+  .mark .t { display: block; font-weight: 600; font-size: 1.05rem; margin-top: 0.35rem; }
+  @media (min-width: 860px) { .mark { position: sticky; top: 2rem; align-self: start; } }
+
+  .text { font-size: clamp(1.25rem, 1.9vw, 1.4rem); line-height: 1.6; }
+  .text p { margin: 0 0 1.15rem; max-width: 38ch; }
+  .text > :last-child { margin-bottom: 0; }
+
+  .ask { color: var(--signal); font-family: var(--display); font-weight: 800; font-size: clamp(1.8rem, 3.8vw, 2.6rem); line-height: 1.05; letter-spacing: -0.02em; margin-top: 2rem !important; }
+  .turn { font-style: italic; padding-left: 1.25rem; border-left: 3px solid var(--kept); margin-top: 1.75rem !important; }
+  .key { font-family: var(--display); font-weight: 600; color: var(--kept); font-size: clamp(1.5rem, 2.8vw, 1.95rem); line-height: 1.2; letter-spacing: -0.01em; margin-top: 2rem !important; max-width: 24ch !important; }
+
+  .verb {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(2.5rem, 6.4vw, 4.6rem);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    margin: 2rem 0 2.25rem !important;
+    max-width: none !important;
+  }
+  .verb span { display: block; }
+  .verb .yes { color: var(--signal); }
+  .verb .no { color: var(--muted); font-size: 0.5em; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 0.35rem; text-decoration: line-through; text-decoration-thickness: 0.08em; text-decoration-color: var(--signal); }
+
+  /* Hold to stop the messages */
+  figure.hold { margin: 2.25rem 0 2.25rem; max-width: 34rem; }
+  .hold canvas { display: block; width: 100%; aspect-ratio: 16 / 10; border-radius: 6px; background: var(--tint); }
+  .hold .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; margin-top: 0.9rem; }
+  .hold button {
+    font-family: var(--display); font-weight: 600; font-size: 1rem;
+    color: var(--on-kept); background: var(--kept); border: 0; border-radius: 999px;
+    padding: 0.7rem 1.3rem; cursor: pointer; user-select: none; -webkit-user-select: none; touch-action: none;
+    transition: background-color 160ms ease, transform 160ms ease;
+  }
+  .hold button:hover { background: var(--kept-deep); }
+  .hold button[aria-pressed="true"] { background: var(--signal); transform: scale(0.97); }
+  .hold .state { font-family: var(--display); font-size: 0.95rem; color: var(--muted); min-height: 1.5em; }
+  .hold figcaption { font-size: 1rem; line-height: 1.5; color: var(--muted); font-style: italic; margin-top: 0.6rem; }
+
+  /* Closing */
+  .closing { position: relative; background: var(--kept); color: var(--on-kept); box-shadow: 0 0 0 100vmax var(--kept); clip-path: inset(0 -100vmax); padding: 6rem 0 6rem; overflow: hidden; }
+  .closing canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.2; pointer-events: none; }
+  .closing .inner { position: relative; max-width: 40rem; }
+  @media (min-width: 860px) { .closing .inner { margin-left: 17rem; } }
+  .closing p { font-size: clamp(1.25rem, 1.9vw, 1.4rem); margin: 0 0 1.15rem; max-width: 38ch; }
+  .closing .still { font-family: var(--display); font-weight: 800; font-size: clamp(2.2rem, 5.4vw, 3.8rem); line-height: 1; letter-spacing: -0.03em; margin: 2.25rem 0 0.6rem; max-width: none; }
+  .closing .still + .still { margin-top: 0; }
+  .closing .still em { font-style: italic; }
+  .breath { display: inline-block; animation: breathe 5.5s ease-in-out infinite; transform-origin: left center; }
+  @keyframes breathe { 0%, 100% { opacity: 0.82; } 50% { opacity: 1; } }
+
+  footer { border-top: 1px solid var(--line); padding: 2rem 0 3rem; color: var(--muted); font-size: 0.95rem; }
+  footer p { margin: 0 0 0.5rem; }
+
+  /* Movements surface as you reach them */
+  .js section.mv .text, .js section.mv .mark { opacity: 0; transform: translateY(10px); transition: opacity 700ms ease, transform 700ms ease; }
+  .js section.mv.seen .text, .js section.mv.seen .mark { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .js section.mv .text, .js section.mv .mark { opacity: 1; transform: none; transition: none; }
+    .breath { animation: none; }
+    .hold button { transition: none; }
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <a class="home" href="/">← AJ van Hoek</a>
+
+  <header class="hero">
+    <div>
+      <h1>Who is reading <span class="q">this?</span></h1>
+      <div class="opening">
+        <p>Stop for a moment.</p>
+        <p>Someone is reading these words. Who?</p>
+        <p>You say: “I am.” Good. Let us look for you.</p>
+      </div>
+      <p class="byline">AJ van Hoek · November 2026</p>
+    </div>
+    <figure class="net">
+      <canvas id="net-hero" aria-label="Animation of a network of small parts; each line lasts only while messages travel along it" role="img"></canvas>
+      <figcaption>
+        <p>Every dot is a part that cannot read. Every line lasts only while messages travel along it.</p>
+        <p class="hint">Click to add a part.</p>
+      </figcaption>
+    </figure>
+  </header>
+
+  <section class="mv">
+    <p class="mark"><span class="n">01</span><span class="t">The parts</span></p>
+    <div class="text">
+      <p>Look at your hand. It is made of cells, very small living things. Your body has about thirty million million of them.</p>
+      <p>Each cell has a job. Some carry air. Some fight sickness. Some carry messages. Some hold you up.</p>
+      <p>Not one of them can read. Not one of them knows your name. Not one of them knows that you are here.</p>
+      <p class="turn">And still, here you are. Reading.</p>
+    </div>
+  </section>
+
+  <section class="mv">
+    <p class="mark"><span class="n">02</span><span class="t">Inside</span></p>
+    <div class="text">
+      <p>Now go inside. Look for yourself.</p>
+      <p>You find blood. You find bone. You find a brain. Look inside the brain, and you find cells again. They send small electric messages to each other. Look inside a cell, and you find parts. Inside the parts, smaller parts.</p>
+      <p>You can look for a very long time. You will not find anyone at home. There is no little you, sitting in the middle, reading.</p>
+      <p class="ask">So where are you?</p>
+    </div>
+  </section>
+
+  <section class="mv">
+    <p class="mark"><span class="n">03</span><span class="t">The bricks</span></p>
+    <div class="text">
+      <p>Here is a strange fact.</p>
+      <p>Your body changes its parts. Your skin makes new skin. Your blood makes new blood. Even inside the cells that stay with you all your life, the small pieces go out and new pieces come in.</p>
+      <p>Most of the atoms in your body were not in your body a few years ago. They were in bread, in water, in air. In the sea. In a field of wheat in another country.</p>
+      <p>The child in your old photos: almost nothing of that child is still here. But you look at the photo and you say: “That is me.”</p>
+      <p class="ask">The bricks change. The house stays. How?</p>
+    </div>
+  </section>
+
+  <section class="mv">
+    <p class="mark"><span class="n">04</span><span class="t">Sleep</span></p>
+    <div class="text">
+      <p>Here is another strange fact.</p>
+      <p>Last night you went to sleep. For some hours, in deep sleep without dreams, you were not there. Not happy. Not sad. Not anything.</p>
+      <p>The cells were there. They kept working. The heart. The lungs. The blood. But you stopped.</p>
+      <p>This morning you came back. Nobody called you. The cells only started to talk to each other again, in a certain way. And there you were.</p>
+      <p class="turn">You do not sit in your body like a person in a house. You happen in it.</p>
+    </div>
+  </section>
+
+  <section class="mv">
+    <p class="mark"><span class="n">05</span><span class="t">The hospital</span></p>
+    <div class="text">
+      <p>Think of a hospital.</p>
+      <p>You are ill. You go in. Some days later you come out, and you are well. Who made you well?</p>
+      <p>The building? No. A building cannot do anything.</p>
+      <p>The doctor? She was with you for ten minutes. Then there was the nurse at night. The man who cleaned your room. The woman in the laboratory, whom you never saw. The people who made the medicine, in another country, years ago. The teacher who taught the doctor.</p>
+      <p>Every one of them goes home at night. Some leave for ever, and new people come. The hospital is never the same people for long.</p>
+      <p>And still the hospital makes people well. Day after day. Year after year. No one person in it can do this. The healing is not in any of them. <em>The healing is between them.</em></p>
+      <p class="key">A hospital is not a thing. It is something that happens.</p>
+    </div>
+  </section>
+
+  <section class="mv">
+    <p class="mark"><span class="n">06</span><span class="t">The hoover</span></p>
+    <div class="text">
+      <p>We see this every day, and we do not see it.</p>
+      <p>Take a hoover out of its box. Plastic. Metal. Wire. Not one part can clean.</p>
+      <p>Put the parts together. Turn it on. Now there is cleaning.</p>
+      <p>Where did the cleaning come from? It was not in any part. It came from the parts, together. And we do not call this magic. We call it normal.</p>
+      <p>So here is the normal thing about you. Nature put your parts together. And now there is seeing. There is thinking. There is loving. There is reading.</p>
+      <p class="turn">Not in any part. From the parts, together.</p>
+    </div>
+  </section>
+
+  <section class="mv">
+    <p class="mark"><span class="n">07</span><span class="t">The answer</span></p>
+    <div class="text">
+      <p>Now we can answer the first question.</p>
+      <p>You are not a thing that has parts. You are what the parts do, together.</p>
+      <p class="verb"><span class="no">You are not a noun.</span><span class="yes">You are a verb.</span></p>
+      <p>The cells do not make you once, like a factory makes a car. They make you now. And now. And now. Every second, millions and millions of small messages go from cell to cell. That, right now, is you.</p>
+    </div>
+  </section>
+
+  <section class="mv">
+    <p class="mark"><span class="n">08</span><span class="t">How thin</span></p>
+    <div class="text">
+      <p>Feel how thin this is.</p>
+      <p>Stop breathing for a few minutes, and the messages stop. And you stop. All the parts are still there. Every one of them. But the verb is gone.</p>
+      <figure class="hold">
+        <canvas id="net-hold" aria-label="A small network. Holding the button stops its messages and its lines fade, while the parts stay." role="img"></canvas>
+        <div class="controls">
+          <button type="button" id="hold-btn" aria-pressed="false">Press and hold</button>
+          <span class="state" id="hold-state" aria-live="polite"></span>
+        </div>
+        <figcaption>Hold the button and the messages stop. The parts stay, but the lines go. Let go, and here the network can start again. A body cannot always do that.</figcaption>
+      </figure>
+      <p>A little too much heat. A little too little sugar. One small vessel closed in the wrong place.</p>
+      <p class="turn">You are not strong like a stone. You are like a song. A song is only there while someone is playing it.</p>
+    </div>
+  </section>
+
+  <section class="mv">
+    <p class="mark"><span class="n">09</span><span class="t">The other side</span></p>
+    <div class="text">
+      <p>And now feel the other side.</p>
+      <p>Today your heart will beat about one hundred thousand times. You will not ask it to. It will do it.</p>
+      <p>Thirty million million cells are working for you at this moment. They do not know you. They will never know you. They do it anyway.</p>
+      <p>Every morning, out of bread and water and air, the network makes you again. Nothing had to do this. Nothing promised it.</p>
+      <p class="key">And still it is happening. Today. Here. As you.</p>
+    </div>
+  </section>
+
+  <section class="mv">
+    <p class="mark"><span class="n">10</span><span class="t">A part, too</span></p>
+    <div class="text">
+      <p>One last thing.</p>
+      <p>You are a part, too. You are a cell in a family. In a circle of friends. In a street, a city, a hospital. Some days you are the one who helps to make a stranger well.</p>
+      <p>Between you and other people, bigger things happen. Things that none of you can do alone. They live in what you send to each other: a word, a look, a kindness, a correction, a meal.</p>
+      <p>When the messages stop, those things stop too.</p>
+      <p class="turn">So be careful with what you send. Something is living in it.</p>
+    </div>
+  </section>
+
+  <section class="closing" aria-label="Closing">
+    <canvas id="net-close" aria-hidden="true"></canvas>
+    <div class="inner">
+      <p>Someone is reading these words.</p>
+      <p>It is not one cell. It is not one thing. It is a very old, very fragile, very beautiful kind of working together. For a short time, it answers to your name.</p>
+      <p>Look up from the page. Breathe.</p>
+      <p class="still">It is still happening.</p>
+      <p class="still"><span class="breath"><em>You</em> are still happening.</span></p>
+    </div>
+  </section>
+
+  <footer>
+    <p>This piece grows out of <a href="https://github.com/albertjanvanhoek/Evolution-by-Emergence">Evolution by Emergence</a>, my work on how things keep existing through their connections.</p>
+    <p><a href="/">← Back to the main page</a></p>
+  </footer>
+</main>
+
+<script>
+(() => {
+  document.documentElement.classList.add("js");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Movements surface as the reader reaches them.
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("seen"); io.unobserve(e.target); } });
+  }, { rootMargin: "0px 0px -12% 0px" });
+  document.querySelectorAll("section.mv").forEach(s => io.observe(s));
+
+  // One rule, as on the main page: a line exists only as long as something travels along it.
+  function makeNet(canvas, opts = {}) {
+    const ctx = canvas.getContext("2d");
+    const DECAY = 0.09, BOOST = 0.42, SEND_RATE = 0.55, REPLY = 0.55, SPEED = 140;
+    const density = opts.density || 4200;
+    let W = 0, H = 0, R = 90, nodes = [], edges = new Map(), pulses = [];
+    let silent = false, visible = true;
+
+    const readColors = () => {
+      const s = getComputedStyle(document.documentElement);
+      const v = n => s.getPropertyValue(n).trim();
+      return opts.onKept
+        ? { line: v("--on-kept"), dot: v("--on-kept"), pulse: v("--on-kept") }
+        : { line: v("--ink"), dot: v("--ink"), pulse: v("--signal") };
+    };
+    let C = readColors();
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { C = readColors(); draw(); });
+
+    const key = (i, j) => (i < j ? i + "-" + j : j + "-" + i);
+    const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+    const neighbours = i => {
+      const out = [];
+      edges.forEach(e => { if (e.a === i) out.push(e.b); else if (e.b === i) out.push(e.a); });
+      return out;
+    };
+    const addNode = (x, y) => { nodes.push({ x, y, vx: 0, vy: 0 }); return nodes.length - 1; };
+    const link = (i, j, s) => {
+      const k = key(i, j);
+      if (!edges.has(k)) edges.set(k, { a: Math.min(i, j), b: Math.max(i, j), s });
+      return edges.get(k);
+    };
+    const send = (from, to) => {
+      const e = edges.get(key(from, to));
+      if (e) pulses.push({ e, from, to, t: 0, len: Math.max(20, dist(nodes[from], nodes[to])) });
+    };
+    const reachOut = i => {
+      const nb = new Set(neighbours(i));
+      let best = -1, bd = Infinity;
+      nodes.forEach((n, j) => {
+        if (j === i || nb.has(j)) return;
+        const d = dist(nodes[i], n);
+        if (d < R * 1.3 && d < bd) { bd = d; best = j; }
+      });
+      if (best >= 0) { link(i, best, 0.12); send(i, best); }
+    };
+
+    function build() {
+      const r = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      W = r.width; H = r.height;
+      if (!W || !H) return;
+      canvas.width = Math.round(W * dpr);
+      canvas.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const n = Math.max(24, Math.min(opts.max || 70, Math.round((W * H) / density)));
+      R = Math.sqrt((W * H) / n) * 1.25;
+      const minD = R * 0.5, pad = 16;
+      nodes = []; edges = new Map(); pulses = [];
+      let guard = 0;
+      while (nodes.length < n && guard++ < 20000) {
+        const p = { x: pad + Math.random() * (W - 2 * pad), y: pad + Math.random() * (H - 2 * pad) };
+        if (nodes.every(q => dist(p, q) > minD)) addNode(p.x, p.y);
+      }
+      nodes.forEach((a, i) => {
+        nodes.map((b, j) => [j, dist(a, b)]).filter(([j]) => j !== i)
+          .sort((u, v) => u[1] - v[1]).slice(0, 2)
+          .forEach(([j]) => link(i, j, 0.4 + Math.random() * 0.5));
+      });
+    }
+
+    function update(dt) {
+      nodes.forEach((n, i) => {
+        n.vx += (Math.random() - 0.5) * 6 * dt;
+        n.vy += (Math.random() - 0.5) * 6 * dt;
+        nodes.forEach((m, j) => {
+          if (j === i) return;
+          const dx = n.x - m.x, dy = n.y - m.y, d2 = dx * dx + dy * dy, min = R * 0.45;
+          if (d2 < min * min && d2 > 0.01) { const f = (min * min - d2) / (min * min) * 20 * dt; const d = Math.sqrt(d2); n.vx += dx / d * f; n.vy += dy / d * f; }
+        });
+        n.vx *= 0.96; n.vy *= 0.96;
+        n.x += n.vx * dt * 10; n.y += n.vy * dt * 10;
+        const pad = 12;
+        if (n.x < pad) n.vx += 2 * dt; if (n.x > W - pad) n.vx -= 2 * dt;
+        if (n.y < pad) n.vy += 2 * dt; if (n.y > H - pad) n.vy -= 2 * dt;
+        n.x = Math.min(W - 4, Math.max(4, n.x)); n.y = Math.min(H - 4, Math.max(4, n.y));
+      });
+
+      // Without messages, lines fade fast: the parts stay, the relations go.
+      const decay = silent ? DECAY * 5 : DECAY;
+      edges.forEach((e, k) => {
+        const stretch = Math.max(1, dist(nodes[e.a], nodes[e.b]) / R);
+        e.s -= decay * stretch * stretch * dt;
+        if (e.s <= 0) edges.delete(k);
+      });
+
+      pulses = pulses.filter(p => {
+        if (silent || !edges.has(key(p.from, p.to))) return false;
+        p.t += (SPEED * dt) / p.len;
+        if (p.t < 1) return true;
+        p.e.s = Math.min(1, p.e.s + BOOST);
+        if (Math.random() < REPLY) send(p.to, p.from);
+        return false;
+      });
+
+      if (!silent) {
+        nodes.forEach((n, i) => {
+          if (Math.random() < SEND_RATE * dt) {
+            const nb = neighbours(i);
+            if (nb.length < 2 || Math.random() < 0.08) reachOut(i);
+            else send(i, nb[Math.floor(Math.random() * nb.length)]);
+          }
+        });
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      ctx.strokeStyle = C.line;
+      edges.forEach(e => {
+        const a = nodes[e.a], b = nodes[e.b];
+        ctx.globalAlpha = Math.min(1, e.s) * 0.75;
+        ctx.lineWidth = 0.6 + e.s * 1.2;
+        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+      });
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = C.pulse;
+      pulses.forEach(p => {
+        const a = nodes[p.from], b = nodes[p.to];
+        ctx.beginPath();
+        ctx.arc(a.x + (b.x - a.x) * p.t, a.y + (b.y - a.y) * p.t, 3.4, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.fillStyle = C.dot;
+      nodes.forEach(n => { ctx.beginPath(); ctx.arc(n.x, n.y, 3.2, 0, Math.PI * 2); ctx.fill(); });
+    }
+
+    if (opts.clickable) {
+      canvas.addEventListener("click", e => {
+        const r = canvas.getBoundingClientRect();
+        const i = addNode(e.clientX - r.left, e.clientY - r.top);
+        reachOut(i); reachOut(i);
+        draw();
+      });
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { build(); draw(); }, 150); });
+
+    // Only animate while on screen.
+    new IntersectionObserver(es => es.forEach(e => { visible = e.isIntersecting; })).observe(canvas);
+
+    build();
+    if (reduce) {
+      for (let s = 0; s < 600; s++) update(1 / 30);
+      draw();
+    } else {
+      let last = performance.now();
+      const loop = now => {
+        const dt = Math.min(0.05, (now - last) / 1000);
+        last = now;
+        if (visible) { update(dt); draw(); }
+        requestAnimationFrame(loop);
+      };
+      requestAnimationFrame(loop);
+    }
+
+    return {
+      setSilent(v) {
+        silent = v;
+        if (reduce) { for (let s = 0; s < 90; s++) update(1 / 30); draw(); }
+      },
+      edgeCount: () => edges.size
+    };
+  }
+
+  makeNet(document.getElementById("net-hero"), { clickable: true });
+  makeNet(document.getElementById("net-close"), { onKept: true, density: 9000, max: 90 });
+
+  // Press and hold: stop the messages.
+  const hold = makeNet(document.getElementById("net-hold"), { density: 3800, max: 50 });
+  const btn = document.getElementById("hold-btn");
+  const state = document.getElementById("hold-state");
+  let held = false, watch = 0;
+
+  function start() {
+    if (held) return;
+    held = true;
+    btn.setAttribute("aria-pressed", "true");
+    hold.setSilent(true);
+    state.textContent = "No messages. The parts are still there.";
+    clearInterval(watch);
+    watch = setInterval(() => {
+      if (held && hold.edgeCount() === 0) state.textContent = "Every part is still there. The verb is gone.";
+    }, 200);
+  }
+  function stop() {
+    if (!held) return;
+    held = false;
+    btn.setAttribute("aria-pressed", "false");
+    hold.setSilent(false);
+    clearInterval(watch);
+    state.textContent = "Messages again. The lines come back.";
+    setTimeout(() => { if (!held) state.textContent = ""; }, 3500);
+  }
+  btn.addEventListener("pointerdown", e => { e.preventDefault(); btn.setPointerCapture?.(e.pointerId); start(); });
+  btn.addEventListener("pointerup", stop);
+  btn.addEventListener("pointercancel", stop);
+  btn.addEventListener("lostpointercapture", stop);
+  btn.addEventListener("keydown", e => { if ((e.key === " " || e.key === "Enter") && !e.repeat) { e.preventDefault(); start(); } });
+  btn.addEventListener("keyup", e => { if (e.key === " " || e.key === "Enter") stop(); });
+  btn.addEventListener("blur", stop);
+  btn.addEventListener("contextmenu", e => e.preventDefault());
+})();
+</script>
+</body>
+</html>
